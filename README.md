@@ -1,2 +1,3 @@
-# TetrisForGenesis
-Tetris game for Genesis, written in C using SGDK.
+# My Awesome Game
+
+This is My Awesome 16 Bit Cartridge game for mega Drive
