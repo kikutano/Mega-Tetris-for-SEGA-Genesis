@@ -3,5 +3,6 @@
 
 #define GRID_ROWS 24
 #define GRID_COLUMNS 10
+#define ROWS_MAX_CLEARED 4
 
 #endif

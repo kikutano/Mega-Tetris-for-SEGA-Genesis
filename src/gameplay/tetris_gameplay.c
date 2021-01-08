@@ -1,6 +1,6 @@
 #include "tetris_piece_mover.c"
 
-int waitFramesForFalling = 10;
+int waitFramesForFalling = 5;
 int currentFrameCount = 0;
 bool tetrisPieceOnBottom;
 bool tetris;
@@ -31,8 +31,10 @@ void updateGameplay() {
             lockTetrisPieceOnBackground();
             tetrisPieceOnBottom = TRUE;
 
-            if ( getCompletedLinesCountAfterPieceTouchBottom() > 0 ) {
+            if (getCompletedRowLinesCount() > 0) {
                 tetris = TRUE;
+
+                clearRows();
             }
         }
     }

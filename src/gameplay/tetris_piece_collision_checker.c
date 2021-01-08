@@ -3,7 +3,7 @@
 
 int leftLimit  = 0;
 int rightLimit = 9;
-int downLimit  = 24;
+int downLimit  = 23;
 
 bool isTetrisPieceOnLeftLimit(struct TetrisPiece *tetrisPiece) {
     return 
@@ -89,23 +89,66 @@ bool isTetrisPieceOnBottom(struct TetrisPiece *tetrisPiece) {
         || (tetrisPiece->block3->row) == downLimit;
 }
 
-int getCompletedLinesCount(bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS]) {
-    int completedCount = 0;
-    bool completedRow = TRUE;
+bool isRowLineCompleted(bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS], int row) {
+    for (int column = 0; column < GRID_COLUMNS; ++column) {
+        if (!tetrisMatrix[column][row]) {
+            return FALSE;
+        }
+    }
 
-    for (int row = 0; row <= GRID_ROWS; ++row) {
-        for (int column = 0; column < GRID_COLUMNS; ++column) {
-            if (!tetrisMatrix[column][row]) {
-                completedRow = FALSE;
+    return TRUE;
+}
+
+bool isRowAlreadyCleared(int rowsCleared[ROWS_MAX_CLEARED], int value) {
+    for (int i = 0; i < ROWS_MAX_CLEARED; ++i) {
+        if (rowsCleared[i] == value) {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+void orderClearedRowsArray(int rowsCleared[ROWS_MAX_CLEARED]) {
+    for (int i = 0; i < ROWS_MAX_CLEARED; ++i) {
+        for (int j = i + 1; j < ROWS_MAX_CLEARED; ++j) {
+            if (rowsCleared[i] > rowsCleared[j]) {
+                int a =  rowsCleared[i];
+                rowsCleared[i] = rowsCleared[j];
+                rowsCleared[j] = a;
             }
         }
-
-        if (completedRow) {
-            ++completedCount;
-        }
-        
-        completedRow = TRUE;
     }
+}
+
+void setCompletedLinesCount(
+    bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS], 
+    int rowsCleared[ROWS_MAX_CLEARED], 
+    struct TetrisPiece *tetrisPiece) {
     
-    return completedCount;
+    int completedCount = 0;
+    if (isRowLineCompleted(tetrisMatrix, tetrisPiece->block0->row)) {
+        rowsCleared[completedCount] = tetrisPiece->block0->row;
+        ++completedCount;
+    }
+
+    if (!isRowAlreadyCleared(rowsCleared, tetrisPiece->block1->row) 
+        && isRowLineCompleted(tetrisMatrix, tetrisPiece->block1->row)) {
+        rowsCleared[completedCount] = tetrisPiece->block1->row;
+        ++completedCount;
+    }
+
+    if (!isRowAlreadyCleared(rowsCleared, tetrisPiece->block2->row) 
+        && isRowLineCompleted(tetrisMatrix, tetrisPiece->block2->row)) {
+        rowsCleared[completedCount] = tetrisPiece->block2->row;
+        ++completedCount;
+    }
+
+    if (!isRowAlreadyCleared(rowsCleared, tetrisPiece->block3->row) 
+        && isRowLineCompleted(tetrisMatrix, tetrisPiece->block3->row)) {
+        rowsCleared[completedCount] = tetrisPiece->block3->row;
+        ++completedCount;
+    }
+
+    //orderClearedRowsArray(rowsCleared);
 }
