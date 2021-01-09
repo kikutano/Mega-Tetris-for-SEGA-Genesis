@@ -34,15 +34,15 @@ int main() {
         TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 1), 
         tetrisSpriteMatrixOffsetX, 
         tetrisSpriteMatrixOffsetY, 
-        GRID_COLUMNS, GRID_ROWS);    
+        GRID_COLUMNS, GRID_ROWS);     
 
     JOY_init();  
-    JOY_setEventHandler(&onJoystickInput);   
-    startGameplay();   
+    JOY_setEventHandler(&onJoystickInput);       
+    startGameplay();      
  
-    while(1) { 
-        updateGameplay();        
-        VDP_waitVSync();      
+    while(1) {  
+        updateGameplay();      
+        VDP_waitVSync();               
     }  
 
     return 0;

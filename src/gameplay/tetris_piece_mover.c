@@ -4,17 +4,47 @@
 #include "tetris_piece_provider.c"
 #include "tetris_piece_collision_checker.c"
 #include "tetris_game_settings.h"
+#include "tetris_random_piece_provider.c"
 
 bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS];
-int rowsCleared[ROWS_MAX_CLEARED];
+u16 rowsCleared[ROWS_MAX_CLEARED];
+//struct TetrisPiece *nextTetrisPiece;
 struct TetrisPiece *currentTetrisPiece;
 
-void updateMatrixSlot(int column, int row, bool value) {
+void updateMatrixSlot(u16 column, u16 row, bool value) {
     tetrisMatrix[column][row] = value;
 }
 
+u16 getNextRandomTetrisPiece() {
+    return getRandomTetrisPieceUsingNesAlgorithm(currentTetrisPiece);
+}
+
 void putNextPieceOnTop() {
-    currentTetrisPiece = createTetrisPiece_O(5, 0, 0);
+    u16 nextTetriPieceType = getNextRandomTetrisPiece();
+
+    if (nextTetriPieceType == TETRISPIECE_I) {
+        currentTetrisPiece = createTetrisPiece_I(5, 0, 0);
+    }
+    else if (nextTetriPieceType == TETRISPIECE_O) {
+        currentTetrisPiece = createTetrisPiece_O(5, 0, 0);
+    } 
+    else if (nextTetriPieceType == TETRISPIECE_T) {
+        currentTetrisPiece = createTetrisPiece_T(5, 0, 0);
+    }
+    else if (nextTetriPieceType == TETRISPIECE_J) {
+        currentTetrisPiece = createTetrisPiece_J(5, 0, 0);
+    }
+    else if (nextTetriPieceType == TETRISPIECE_L) {
+        currentTetrisPiece = createTetrisPiece_L(5, 0, 0);
+    }
+    else if (nextTetriPieceType == TETRISPIECE_S) {
+        currentTetrisPiece = createTetrisPiece_S(5, 0, 0);
+    }
+    else if (nextTetriPieceType == TETRISPIECE_Z) {
+        currentTetrisPiece = createTetrisPiece_Z(5, 0, 0);
+    }
+
+    drawTetrisPiece(currentTetrisPiece);
 }
 
 bool isCurrentTetrisPieceOnBottom() {
@@ -36,24 +66,59 @@ void lockTetrisPieceOnBackground() {
     occupyMatrixSlotForTetrisPiece(currentTetrisPiece);
 }
 
-void moveDownRowLine(int row) {
-    for (int column = 0; column < GRID_COLUMNS; ++column) {
-        if (tetrisMatrix[column][row]) {
-            tetrisMatrix[column][row] = FALSE;
-            deleteTetrisTileOnGrid(column, row);
-            drawTetrisTileOnGrid(column, row + 1);
-            tetrisMatrix[column][row + 1] = TRUE;
-        }
-    }
-}
-
 void updateTetrisPiecePosition() {
     deleteTetrisPiece(currentTetrisPiece);
-    currentTetrisPiece 
-        = createTetrisPiece_O(
-            currentTetrisPiece->pivotPosX, 
-            currentTetrisPiece->pivotPosY, 
-            currentTetrisPiece->rotationCount);
+    if (currentTetrisPiece->Type == TETRISPIECE_I) {
+        currentTetrisPiece 
+            = createTetrisPiece_I(
+                currentTetrisPiece->pivotPosX, 
+                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->rotationCount);
+    }
+    else if (currentTetrisPiece->Type == TETRISPIECE_O) {
+        currentTetrisPiece 
+            = createTetrisPiece_O(
+                currentTetrisPiece->pivotPosX, 
+                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->rotationCount);
+    } 
+    else if (currentTetrisPiece->Type == TETRISPIECE_T) {
+        currentTetrisPiece 
+            = createTetrisPiece_T(
+                currentTetrisPiece->pivotPosX, 
+                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->rotationCount);
+    }
+    else if (currentTetrisPiece->Type == TETRISPIECE_J) {
+        currentTetrisPiece 
+            = createTetrisPiece_J(
+                currentTetrisPiece->pivotPosX, 
+                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->rotationCount);
+    }
+    else if (currentTetrisPiece->Type == TETRISPIECE_L) {
+        currentTetrisPiece 
+            = createTetrisPiece_L(
+                currentTetrisPiece->pivotPosX, 
+                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->rotationCount);
+    }
+    else if (currentTetrisPiece->Type == TETRISPIECE_S) {
+        currentTetrisPiece 
+            = createTetrisPiece_S(
+                currentTetrisPiece->pivotPosX, 
+                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->rotationCount);
+    }
+    else if (currentTetrisPiece->Type == TETRISPIECE_Z) {
+        currentTetrisPiece 
+            = createTetrisPiece_Z(
+                currentTetrisPiece->pivotPosX, 
+                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->rotationCount);
+    }
+
+    drawTetrisPiece(currentTetrisPiece);
 }
 
 void rotateAntiClockwiseCurrentTetrisPiece() {
@@ -97,17 +162,25 @@ void moveCurrentTetrisPieceRight() {
     }
 }
 
-void moveTetrisRowOnBottom(int row, int offset) {
-    for (int column = 0; column < GRID_COLUMNS; ++column) {
-        if (tetrisMatrix[column][row]) {
-            drawTetrisTileOnGrid(column, row + offset);
-            tetrisMatrix[column][row + offset] = TRUE;
-            deleteTetrisTileOnGrid(column, row);
+void moveDownTetrisRow(u16 row, u16 offset) {
+    deleteSpritesOnRow(row);
+
+    for (u16 column = 0; column < GRID_COLUMNS; ++column) {    
+        if (row + offset < GRID_ROWS) {
+            if (tetrisMatrix[column][row]) {
+                drawTetrisTileOnGrid(column, row + offset);
+                tetrisMatrix[column][row + offset] = TRUE;
+            }
+            else {
+                tetrisMatrix[column][row + offset] = FALSE;
+            }
         }
+
+        tetrisMatrix[column][row] = FALSE;
     }
 }
 
-int getCompletedRowLinesCount() {
+u16 getCompletedRowLinesCount() {
     setCompletedLinesCount(tetrisMatrix, rowsCleared, currentTetrisPiece);
 
     if (rowsCleared[3] != 0) {
@@ -130,19 +203,18 @@ int getCompletedRowLinesCount() {
 }
 
 void clearRows() {
-    int rowCount = 0;
-    for (int x = 0; x < ROWS_MAX_CLEARED; ++x) {
+    u16 rowCount = 0;
+    u16 startPou16 = 0;
+    for (u16 x = 0; x < ROWS_MAX_CLEARED; ++x) {
         if (rowsCleared[x] != 0) {
             deleteSpritesOnRow(rowsCleared[x]);
             ++rowCount;
+            startPou16 = rowsCleared[x];
         }
     }
-    
-    //ordinare la lista rowsCleared e farlo partire dal più piccolo
-    int startPoint = GRID_ROWS - rowCount - 1;
 
-    for (int i = startPoint; i > 0; --i) {
-        moveTetrisRowOnBottom(i, rowCount);
+    for (u16 i = startPou16 - 2; i > 0; --i) {
+        moveDownTetrisRow(i, rowCount);
     }
     
     rowsCleared[0] = 0;

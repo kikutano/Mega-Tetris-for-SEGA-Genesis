@@ -1,9 +1,9 @@
 #include "tetris_piece.h"
 #include "tetris_game_settings.h"
 
-int leftLimit  = 0;
-int rightLimit = 9;
-int downLimit  = 23;
+u16 leftLimit  = 0;
+u16 rightLimit = 9;
+u16 downLimit  = 23;
 
 bool isTetrisPieceOnLeftLimit(struct TetrisPiece *tetrisPiece) {
     return 
@@ -89,8 +89,8 @@ bool isTetrisPieceOnBottom(struct TetrisPiece *tetrisPiece) {
         || (tetrisPiece->block3->row) == downLimit;
 }
 
-bool isRowLineCompleted(bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS], int row) {
-    for (int column = 0; column < GRID_COLUMNS; ++column) {
+bool isRowLineCompleted(bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS], u16 row) {
+    for (u16 column = 0; column < GRID_COLUMNS; ++column) {
         if (!tetrisMatrix[column][row]) {
             return FALSE;
         }
@@ -99,8 +99,8 @@ bool isRowLineCompleted(bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS], int row) {
     return TRUE;
 }
 
-bool isRowAlreadyCleared(int rowsCleared[ROWS_MAX_CLEARED], int value) {
-    for (int i = 0; i < ROWS_MAX_CLEARED; ++i) {
+bool isRowAlreadyCleared(u16 rowsCleared[ROWS_MAX_CLEARED], u16 value) {
+    for (u16 i = 0; i < ROWS_MAX_CLEARED; ++i) {
         if (rowsCleared[i] == value) {
             return TRUE;
         }
@@ -109,11 +109,11 @@ bool isRowAlreadyCleared(int rowsCleared[ROWS_MAX_CLEARED], int value) {
     return FALSE;
 }
 
-void orderClearedRowsArray(int rowsCleared[ROWS_MAX_CLEARED]) {
-    for (int i = 0; i < ROWS_MAX_CLEARED; ++i) {
-        for (int j = i + 1; j < ROWS_MAX_CLEARED; ++j) {
+void orderClearedRowsArray(u16 rowsCleared[ROWS_MAX_CLEARED]) {
+    for (u16 i = 0; i < ROWS_MAX_CLEARED; ++i) {
+        for (u16 j = i + 1; j < ROWS_MAX_CLEARED; ++j) {
             if (rowsCleared[i] > rowsCleared[j]) {
-                int a =  rowsCleared[i];
+                u16 a =  rowsCleared[i];
                 rowsCleared[i] = rowsCleared[j];
                 rowsCleared[j] = a;
             }
@@ -123,10 +123,10 @@ void orderClearedRowsArray(int rowsCleared[ROWS_MAX_CLEARED]) {
 
 void setCompletedLinesCount(
     bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS], 
-    int rowsCleared[ROWS_MAX_CLEARED], 
+    u16 rowsCleared[ROWS_MAX_CLEARED], 
     struct TetrisPiece *tetrisPiece) {
     
-    int completedCount = 0;
+    u16 completedCount = 0;
     if (isRowLineCompleted(tetrisMatrix, tetrisPiece->block0->row)) {
         rowsCleared[completedCount] = tetrisPiece->block0->row;
         ++completedCount;
@@ -150,5 +150,5 @@ void setCompletedLinesCount(
         ++completedCount;
     }
 
-    //orderClearedRowsArray(rowsCleared);
+    orderClearedRowsArray(rowsCleared);
 }
