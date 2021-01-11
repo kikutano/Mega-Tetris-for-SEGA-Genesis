@@ -42,7 +42,7 @@ int main() {
  
     while(1) {  
         updateGameplay();      
-        VDP_waitVSync();               
+        VDP_waitVSync();  
     }  
 
     return 0;

@@ -174,9 +174,9 @@ void moveDownTetrisRow(u16 row, u16 offset) {
             else {
                 tetrisMatrix[column][row + offset] = FALSE;
             }
-        }
 
-        tetrisMatrix[column][row] = FALSE;
+            tetrisMatrix[column][row] = FALSE;
+        }
     }
 }
 
@@ -204,19 +204,21 @@ u16 getCompletedRowLinesCount() {
 
 void clearRows() {
     u16 rowCount = 0;
-    u16 startPou16 = 0;
+    u16 startPoint = 0;
     for (u16 x = 0; x < ROWS_MAX_CLEARED; ++x) {
         if (rowsCleared[x] != 0) {
             deleteSpritesOnRow(rowsCleared[x]);
             ++rowCount;
-            startPou16 = rowsCleared[x];
+            startPoint = rowsCleared[x];
         }
     }
 
-    for (u16 i = startPou16 - 2; i > 0; --i) {
+    startPoint -= rowCount;
+
+    for (u16 i = startPoint; i > 0; --i) {
         moveDownTetrisRow(i, rowCount);
     }
-    
+
     rowsCleared[0] = 0;
     rowsCleared[1] = 0;
     rowsCleared[2] = 0;

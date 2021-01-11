@@ -109,7 +109,7 @@ bool isRowAlreadyCleared(u16 rowsCleared[ROWS_MAX_CLEARED], u16 value) {
     return FALSE;
 }
 
-void orderClearedRowsArray(u16 rowsCleared[ROWS_MAX_CLEARED]) {
+void sortClearedRowsArray(u16 rowsCleared[ROWS_MAX_CLEARED]) {
     for (u16 i = 0; i < ROWS_MAX_CLEARED; ++i) {
         for (u16 j = i + 1; j < ROWS_MAX_CLEARED; ++j) {
             if (rowsCleared[i] > rowsCleared[j]) {
@@ -150,5 +150,5 @@ void setCompletedLinesCount(
         ++completedCount;
     }
 
-    orderClearedRowsArray(rowsCleared);
+    sortClearedRowsArray(rowsCleared);
 }
