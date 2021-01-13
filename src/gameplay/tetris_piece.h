@@ -41,6 +41,6 @@ struct TetrisPiece {
     u16 pivotPosX;
     u16 pivotPosY;
     int rotationCount;
-    u16 Type;
+    u16 type;
 };
 #endif

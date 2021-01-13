@@ -56,7 +56,7 @@ struct TetrisPiece* createTetrisPiece_T(
     tetrisPiece->rotationCount = rotationCount;
     tetrisPiece->pivotPosX = column;
     tetrisPiece->pivotPosY = row;
-    tetrisPiece->Type = TETRISPIECE_T;
+    tetrisPiece->type = TETRISPIECE_T;
 
     return tetrisPiece;
 }
@@ -79,7 +79,7 @@ struct TetrisPiece* createTetrisPiece_O(
     tetrisPiece->rotationCount = rotationCount;
     tetrisPiece->pivotPosX = column;
     tetrisPiece->pivotPosY = row;
-    tetrisPiece->Type = TETRISPIECE_O;
+    tetrisPiece->type = TETRISPIECE_O;
 
     return tetrisPiece;
 }
@@ -112,7 +112,7 @@ struct TetrisPiece* createTetrisPiece_I(
     tetrisPiece->rotationCount = rotationCount;
     tetrisPiece->pivotPosX = column;
     tetrisPiece->pivotPosY = row;
-    tetrisPiece->Type = TETRISPIECE_I;
+    tetrisPiece->type = TETRISPIECE_I;
 
     return tetrisPiece;
 }
@@ -165,7 +165,7 @@ struct TetrisPiece* createTetrisPiece_J(
     tetrisPiece->rotationCount = rotationCount;
     tetrisPiece->pivotPosX = column;
     tetrisPiece->pivotPosY = row;
-    tetrisPiece->Type = TETRISPIECE_J;
+    tetrisPiece->type = TETRISPIECE_J;
 
     return tetrisPiece;
 }
@@ -218,7 +218,7 @@ struct TetrisPiece* createTetrisPiece_L(
     tetrisPiece->rotationCount = rotationCount;
     tetrisPiece->pivotPosX = column;
     tetrisPiece->pivotPosY = row;
-    tetrisPiece->Type = TETRISPIECE_L;
+    tetrisPiece->type = TETRISPIECE_L;
 
     return tetrisPiece;
 }
@@ -251,7 +251,7 @@ struct TetrisPiece* createTetrisPiece_S(
     tetrisPiece->rotationCount = rotationCount;
     tetrisPiece->pivotPosX = column;
     tetrisPiece->pivotPosY = row;
-    tetrisPiece->Type = TETRISPIECE_S;
+    tetrisPiece->type = TETRISPIECE_S;
 
     return tetrisPiece;
 }
@@ -284,7 +284,7 @@ struct TetrisPiece* createTetrisPiece_Z(
     tetrisPiece->rotationCount = rotationCount;
     tetrisPiece->pivotPosX = column;
     tetrisPiece->pivotPosY = row;
-    tetrisPiece->Type = TETRISPIECE_Z;
+    tetrisPiece->type = TETRISPIECE_Z;
 
     return tetrisPiece;
 }

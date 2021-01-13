@@ -77,49 +77,49 @@ void lockTetrisPieceOnBackground() {
 
 void updateTetrisPiecePosition() {
     deleteTetrisPiece(currentTetrisPiece);
-    if (currentTetrisPiece->Type == TETRISPIECE_I) {
+    if (currentTetrisPiece->type == TETRISPIECE_I) {
         currentTetrisPiece 
             = createTetrisPiece_I(
                 currentTetrisPiece->pivotPosX, 
                 currentTetrisPiece->pivotPosY, 
                 currentTetrisPiece->rotationCount);
     }
-    else if (currentTetrisPiece->Type == TETRISPIECE_O) {
+    else if (currentTetrisPiece->type == TETRISPIECE_O) {
         currentTetrisPiece 
             = createTetrisPiece_O(
                 currentTetrisPiece->pivotPosX, 
                 currentTetrisPiece->pivotPosY, 
                 currentTetrisPiece->rotationCount);
     } 
-    else if (currentTetrisPiece->Type == TETRISPIECE_T) {
+    else if (currentTetrisPiece->type == TETRISPIECE_T) {
         currentTetrisPiece 
             = createTetrisPiece_T(
                 currentTetrisPiece->pivotPosX, 
                 currentTetrisPiece->pivotPosY, 
                 currentTetrisPiece->rotationCount);
     }
-    else if (currentTetrisPiece->Type == TETRISPIECE_J) {
+    else if (currentTetrisPiece->type == TETRISPIECE_J) {
         currentTetrisPiece 
             = createTetrisPiece_J(
                 currentTetrisPiece->pivotPosX, 
                 currentTetrisPiece->pivotPosY, 
                 currentTetrisPiece->rotationCount);
     }
-    else if (currentTetrisPiece->Type == TETRISPIECE_L) {
+    else if (currentTetrisPiece->type == TETRISPIECE_L) {
         currentTetrisPiece 
             = createTetrisPiece_L(
                 currentTetrisPiece->pivotPosX, 
                 currentTetrisPiece->pivotPosY, 
                 currentTetrisPiece->rotationCount);
     }
-    else if (currentTetrisPiece->Type == TETRISPIECE_S) {
+    else if (currentTetrisPiece->type == TETRISPIECE_S) {
         currentTetrisPiece 
             = createTetrisPiece_S(
                 currentTetrisPiece->pivotPosX, 
                 currentTetrisPiece->pivotPosY, 
                 currentTetrisPiece->rotationCount);
     }
-    else if (currentTetrisPiece->Type == TETRISPIECE_Z) {
+    else if (currentTetrisPiece->type == TETRISPIECE_Z) {
         currentTetrisPiece 
             = createTetrisPiece_Z(
                 currentTetrisPiece->pivotPosX, 

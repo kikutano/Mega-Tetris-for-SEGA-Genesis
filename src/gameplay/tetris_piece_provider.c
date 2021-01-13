@@ -3,23 +3,23 @@
 #include "tetris_piece.h"
 #include "tetris_piece_creator.c"
 
-void drawTetrisBlock(struct Block *block) {
+void drawTetrisBlock(struct Block *block, u16 type) {
     VDP_setTileMapXY(
-        BG_A, 1, 
+        BG_A, TILE_ATTR_FULL(PAL2, 0, FALSE, FALSE, type + 1), 
         getBlockSpritePositionX(block),
         getBlockSpritePositionY(block));
     
-    VDP_fillTileMapRectInc(
-        BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 3), 
+    /*VDP_fillTileMapRectInc(
+        BG_A, TILE_ATTR_FULL(PAL1, 0, FALSE, FALSE, 2), 
         getBlockSpritePositionX(block),
-        getBlockSpritePositionY(block), 1, 1);
+        getBlockSpritePositionY(block), 1, 1);*/
 }
 
 void drawTetrisPiece(struct TetrisPiece *tetrisPiece) {
-    drawTetrisBlock(tetrisPiece->block0);
-    drawTetrisBlock(tetrisPiece->block1);
-    drawTetrisBlock(tetrisPiece->block2);
-    drawTetrisBlock(tetrisPiece->block3);
+    drawTetrisBlock(tetrisPiece->block0, tetrisPiece->type);
+    drawTetrisBlock(tetrisPiece->block1, tetrisPiece->type);
+    drawTetrisBlock(tetrisPiece->block2, tetrisPiece->type);
+    drawTetrisBlock(tetrisPiece->block3, tetrisPiece->type);
 }
 
 void deleteTetrisBlock(struct Block *block) {

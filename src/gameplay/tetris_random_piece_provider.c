@@ -17,7 +17,7 @@ u16 getRandomTetrisPieceUsingNesAlgorithm(struct TetrisPiece *currentTetrisPiece
     if (currentTetrisPiece != NULL) {
         u16 nextTetrisPieceType = getRandomNumber(tetrisPiecesNumber);
 
-        if (nextTetrisPieceType != currentTetrisPiece->Type) {
+        if (nextTetrisPieceType != currentTetrisPiece->type) {
             return nextTetrisPieceType;
         }
     }
