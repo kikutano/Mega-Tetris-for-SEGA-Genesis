@@ -24,16 +24,16 @@ void onJoystickInput( u16 joy, u16 changed, u16 state) {
 int main() {
  
     VDP_setPaletteColor(0, RGB24_TO_VDPCOLOR(0x6dc2ca));
-    
+     
     //VDP_setPalette(PAL1, bgtile.palette->data);
 
-    VDP_loadTileSet(tetrisblock_I.tileset, 1, DMA);
-    VDP_loadTileSet(tetrisblock_J.tileset, 2, DMA);
-    VDP_loadTileSet(tetrisblock_L.tileset, 3, DMA);
-    VDP_loadTileSet(tetrisblock_O.tileset, 4, DMA);
-    VDP_loadTileSet(tetrisblock_S.tileset, 5, DMA);
-    VDP_loadTileSet(tetrisblock_T.tileset, 6, DMA);
-    VDP_loadTileSet(tetrisblock_Z.tileset, 7, DMA);
+    VDP_loadTileSet(tetrisblock_I.tileset, TETRISPIECE_I, DMA);
+    VDP_loadTileSet(tetrisblock_J.tileset, TETRISPIECE_J, DMA);
+    VDP_loadTileSet(tetrisblock_L.tileset, TETRISPIECE_L, DMA);
+    VDP_loadTileSet(tetrisblock_O.tileset, TETRISPIECE_O, DMA);
+    VDP_loadTileSet(tetrisblock_S.tileset, TETRISPIECE_S, DMA);
+    VDP_loadTileSet(tetrisblock_T.tileset, TETRISPIECE_T, DMA);
+    VDP_loadTileSet(tetrisblock_Z.tileset, TETRISPIECE_Z, DMA);
 
     VDP_loadTileSet(bgtile.tileset, 8, DMA);
     VDP_setPalette(PAL2, bgtile.palette->data);  
@@ -49,16 +49,16 @@ int main() {
         BG_B,  
         TILE_ATTR_FULL(PAL2, 0, FALSE, FALSE, 8), 
         tetrisSpriteMatrixOffsetX, 
-        tetrisSpriteMatrixOffsetY, 
+        tetrisSpriteMatrixOffsetY,  
         GRID_COLUMNS, GRID_ROWS);
 
     JOY_init();   
-    JOY_setEventHandler(&onJoystickInput); 
-    startGameplay();       
+    JOY_setEventHandler(&onJoystickInput);    
+    startGameplay();          
  
     while(1) {  
-        updateGameplay();            
-        VDP_waitVSync();  
+        updateGameplay();               
+        VDP_waitVSync();   
     }  
 
     return 0;

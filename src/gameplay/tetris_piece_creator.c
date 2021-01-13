@@ -13,6 +13,13 @@ struct TetrisPiece* createTetrisPieceContainer() {
     return tetrisPiece;
 }
 
+void setTetrisBlocksType(struct TetrisPiece *tetrisPiece) {
+    tetrisPiece->block0->type = tetrisPiece->type;
+    tetrisPiece->block1->type = tetrisPiece->type;
+    tetrisPiece->block2->type = tetrisPiece->type;
+    tetrisPiece->block3->type = tetrisPiece->type;
+}
+
 struct TetrisPiece* createTetrisPiece_T(
     u16 column, u16 row, int rotationCount) {
     struct TetrisPiece *tetrisPiece = createTetrisPieceContainer();
@@ -58,6 +65,7 @@ struct TetrisPiece* createTetrisPiece_T(
     tetrisPiece->pivotPosY = row;
     tetrisPiece->type = TETRISPIECE_T;
 
+    setTetrisBlocksType(tetrisPiece);
     return tetrisPiece;
 }
 
@@ -65,22 +73,21 @@ struct TetrisPiece* createTetrisPiece_O(
     u16 column, u16 row, int rotationCount) {
     struct TetrisPiece *tetrisPiece = createTetrisPieceContainer();
 
-    if (rotationCount == 0) {
-        tetrisPiece->block0->row = row;
-        tetrisPiece->block0->column = column;
-        tetrisPiece->block1->row = row;
-        tetrisPiece->block1->column = column + 1;
-        tetrisPiece->block2->row = row + 1;
-        tetrisPiece->block2->column = column;
-        tetrisPiece->block3->row = row + 1;
-        tetrisPiece->block3->column = column + 1;
-    }
+    tetrisPiece->block0->row = row;
+    tetrisPiece->block0->column = column;
+    tetrisPiece->block1->row = row;
+    tetrisPiece->block1->column = column + 1;
+    tetrisPiece->block2->row = row + 1;
+    tetrisPiece->block2->column = column;
+    tetrisPiece->block3->row = row + 1;
+    tetrisPiece->block3->column = column + 1;
 
     tetrisPiece->rotationCount = rotationCount;
     tetrisPiece->pivotPosX = column;
     tetrisPiece->pivotPosY = row;
     tetrisPiece->type = TETRISPIECE_O;
 
+    setTetrisBlocksType(tetrisPiece);
     return tetrisPiece;
 }
 
@@ -114,6 +121,7 @@ struct TetrisPiece* createTetrisPiece_I(
     tetrisPiece->pivotPosY = row;
     tetrisPiece->type = TETRISPIECE_I;
 
+    setTetrisBlocksType(tetrisPiece);
     return tetrisPiece;
 }
 
@@ -167,6 +175,7 @@ struct TetrisPiece* createTetrisPiece_J(
     tetrisPiece->pivotPosY = row;
     tetrisPiece->type = TETRISPIECE_J;
 
+    setTetrisBlocksType(tetrisPiece);
     return tetrisPiece;
 }
 
@@ -220,6 +229,7 @@ struct TetrisPiece* createTetrisPiece_L(
     tetrisPiece->pivotPosY = row;
     tetrisPiece->type = TETRISPIECE_L;
 
+    setTetrisBlocksType(tetrisPiece);
     return tetrisPiece;
 }
 
@@ -253,6 +263,7 @@ struct TetrisPiece* createTetrisPiece_S(
     tetrisPiece->pivotPosY = row;
     tetrisPiece->type = TETRISPIECE_S;
 
+    setTetrisBlocksType(tetrisPiece);
     return tetrisPiece;
 }
 
@@ -286,5 +297,6 @@ struct TetrisPiece* createTetrisPiece_Z(
     tetrisPiece->pivotPosY = row;
     tetrisPiece->type = TETRISPIECE_Z;
 
+    setTetrisBlocksType(tetrisPiece);
     return tetrisPiece;
 }

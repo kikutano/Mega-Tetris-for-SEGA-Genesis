@@ -1,10 +1,11 @@
 #include <genesis.h>
 #include "tetris_piece.h"
 
-u16 tetrisPiecesNumber = 7;
+u16 tetrisPiecesNumber = 6;
 
+//from 1 to 7
 u16 getRandomNumber(u16 endIndex) {
-    return (random() % endIndex - 1) + 1;
+    return (random() % endIndex - 1) + 2;
 }
 
 /*

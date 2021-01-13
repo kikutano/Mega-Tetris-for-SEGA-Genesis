@@ -6,7 +6,7 @@
 #include "tetris_game_settings.h"
 #include "tetris_random_piece_provider.c"
 
-bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS];
+u16  tetrisMatrix[GRID_COLUMNS][GRID_ROWS];
 u16 rowsCleared[ROWS_MAX_CLEARED];
 u16 rowStartPoint = 0;
 u16 columnStartPoint = 5;
@@ -65,10 +65,10 @@ bool isCurrentTetrisPieceTouchingAnotherPieceOnBottom() {
 }
 
 void occupyMatrixSlotForTetrisPiece(struct TetrisPiece *tetrisPiece) {
-    updateMatrixSlot(tetrisPiece->block0->column, tetrisPiece->block0->row, TRUE);
-    updateMatrixSlot(tetrisPiece->block1->column, tetrisPiece->block1->row, TRUE);
-    updateMatrixSlot(tetrisPiece->block2->column, tetrisPiece->block2->row, TRUE);
-    updateMatrixSlot(tetrisPiece->block3->column, tetrisPiece->block3->row, TRUE);
+    updateMatrixSlot(tetrisPiece->block0->column, tetrisPiece->block0->row, tetrisPiece->type);
+    updateMatrixSlot(tetrisPiece->block1->column, tetrisPiece->block1->row, tetrisPiece->type);
+    updateMatrixSlot(tetrisPiece->block2->column, tetrisPiece->block2->row, tetrisPiece->type);
+    updateMatrixSlot(tetrisPiece->block3->column, tetrisPiece->block3->row, tetrisPiece->type);
 }
 
 void lockTetrisPieceOnBackground() {
@@ -177,8 +177,9 @@ void moveDownTetrisRow(u16 row, u16 offset) {
     for (u16 column = 0; column < GRID_COLUMNS; ++column) {    
         if (row + offset < GRID_ROWS) {
             if (tetrisMatrix[column][row]) {
-                drawTetrisTileOnGrid(column, row + offset);
-                tetrisMatrix[column][row + offset] = TRUE;
+                u16 type = tetrisMatrix[column][row];
+                drawTetrisTileOnGrid(column, row + offset, type);
+                tetrisMatrix[column][row + offset] = tetrisMatrix[column][row];
             }
             else {
                 tetrisMatrix[column][row + offset] = FALSE;

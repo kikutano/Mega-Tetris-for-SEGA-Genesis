@@ -22,7 +22,7 @@ bool isTetrisPieceOnRightLimit(struct TetrisPiece *tetrisPiece) {
 }
 
 bool isTetrisPieceTouchingAnotherPieceOnLeft(
-    bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS], struct TetrisPiece *tetrisPiece) {
+    u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], struct TetrisPiece *tetrisPiece) {
         return 
             tetrisMatrix
                 [tetrisPiece->block0->column - 1]
@@ -42,7 +42,7 @@ bool isTetrisPieceTouchingAnotherPieceOnLeft(
 }
 
 bool isTetrisPieceTouchingAnotherPieceOnRight(
-    bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS], struct TetrisPiece *tetrisPiece) {
+    u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], struct TetrisPiece *tetrisPiece) {
         return 
             tetrisMatrix
                 [tetrisPiece->block0->column + 1]
@@ -62,7 +62,7 @@ bool isTetrisPieceTouchingAnotherPieceOnRight(
 }
 
 bool isTetrisPieceTouchingAnotherPieceOnBottom(
-    bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS], struct TetrisPiece *tetrisPiece) {
+    u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], struct TetrisPiece *tetrisPiece) {
     return 
         tetrisMatrix
             [tetrisPiece->block0->column]
@@ -89,7 +89,7 @@ bool isTetrisPieceOnBottom(struct TetrisPiece *tetrisPiece) {
         || (tetrisPiece->block3->row) == downLimit;
 }
 
-bool isRowLineCompleted(bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS], u16 row) {
+bool isRowLineCompleted(u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], u16 row) {
     for (u16 column = 0; column < GRID_COLUMNS; ++column) {
         if (!tetrisMatrix[column][row]) {
             return FALSE;
@@ -122,7 +122,7 @@ void sortClearedRowsArray(u16 rowsCleared[ROWS_MAX_CLEARED]) {
 }
 
 void setCompletedLinesCount(
-    bool tetrisMatrix[GRID_COLUMNS][GRID_ROWS], 
+    u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], 
     u16 rowsCleared[ROWS_MAX_CLEARED], 
     struct TetrisPiece *tetrisPiece) {
     

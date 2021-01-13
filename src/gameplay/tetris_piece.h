@@ -7,6 +7,7 @@ int tetrisSpriteMatrixOffsetY = 2;
 struct Block {
     u16 row;
     u16 column;
+    u16 type;
 };
 
 int getBlockSpritePositionX(struct Block *block) {
@@ -25,13 +26,13 @@ int getBlockSpritePositionYFromRow(int row) {
     return row + tetrisSpriteMatrixOffsetY;
 }
 
-u16 TETRISPIECE_I = 0;
-u16 TETRISPIECE_J = 1;
-u16 TETRISPIECE_L = 2;
-u16 TETRISPIECE_O = 3;
-u16 TETRISPIECE_S = 4;
-u16 TETRISPIECE_T = 5;
-u16 TETRISPIECE_Z = 6;
+u16 TETRISPIECE_I = 1;
+u16 TETRISPIECE_J = 2;
+u16 TETRISPIECE_L = 3;
+u16 TETRISPIECE_O = 4;
+u16 TETRISPIECE_S = 5;
+u16 TETRISPIECE_T = 6;
+u16 TETRISPIECE_Z = 7;
 
 struct TetrisPiece {
     struct Block *block0;
@@ -40,7 +41,7 @@ struct TetrisPiece {
     struct Block *block3;
     u16 pivotPosX;
     u16 pivotPosY;
-    int rotationCount;
     u16 type;
+    int rotationCount;
 };
 #endif
