@@ -5,7 +5,8 @@ u16 tetrisPiecesNumber = 6;
 
 //from 1 to 7
 u16 getRandomNumber(u16 endIndex) {
-    return (random() % endIndex - 1) + 2;
+    return TETRISPIECE_T;
+    //return (random() % endIndex - 1) + 2;
 }
 
 /*

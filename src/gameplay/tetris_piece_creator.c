@@ -38,10 +38,10 @@ struct TetrisPiece* createTetrisPiece_T(
     else if (rotationCount == 1) {
         tetrisPiece->block1->row = row - 1;
         tetrisPiece->block1->column = column;
-        tetrisPiece->block2->row = row;
-        tetrisPiece->block2->column = column + 1;
-        tetrisPiece->block3->row = row + 1;
-        tetrisPiece->block3->column = column;
+        tetrisPiece->block2->row = row + 1;
+        tetrisPiece->block2->column = column;
+        tetrisPiece->block3->row = row;
+        tetrisPiece->block3->column = column - 1;
     }
     else if (rotationCount == 2) {
         tetrisPiece->block1->row = row - 1;
@@ -54,15 +54,15 @@ struct TetrisPiece* createTetrisPiece_T(
     else if (rotationCount == 3) {
         tetrisPiece->block1->row = row - 1;
         tetrisPiece->block1->column = column;
-        tetrisPiece->block2->row = row + 1;
-        tetrisPiece->block2->column = column;
-        tetrisPiece->block3->row = row;
-        tetrisPiece->block3->column = column - 1;
+        tetrisPiece->block2->row = row;
+        tetrisPiece->block2->column = column + 1;
+        tetrisPiece->block3->row = row + 1;
+        tetrisPiece->block3->column = column;
     }
 
     tetrisPiece->rotationCount = rotationCount;
-    tetrisPiece->pivotPosX = column;
-    tetrisPiece->pivotPosY = row;
+    tetrisPiece->pivotColumn = column;
+    tetrisPiece->pivotRow = row;
     tetrisPiece->type = TETRISPIECE_T;
 
     setTetrisBlocksType(tetrisPiece);
@@ -83,8 +83,8 @@ struct TetrisPiece* createTetrisPiece_O(
     tetrisPiece->block3->column = column + 1;
 
     tetrisPiece->rotationCount = rotationCount;
-    tetrisPiece->pivotPosX = column;
-    tetrisPiece->pivotPosY = row;
+    tetrisPiece->pivotColumn = column;
+    tetrisPiece->pivotRow = row;
     tetrisPiece->type = TETRISPIECE_O;
 
     setTetrisBlocksType(tetrisPiece);
@@ -94,31 +94,30 @@ struct TetrisPiece* createTetrisPiece_O(
 struct TetrisPiece* createTetrisPiece_I(
     u16 column, u16 row, int rotationCount) {
     struct TetrisPiece *tetrisPiece = createTetrisPieceContainer();
+    
+    tetrisPiece->block2->row = row;
+    tetrisPiece->block2->column = column;
 
     if (rotationCount == 0 || rotationCount == 2) {
         tetrisPiece->block0->row = row;
-        tetrisPiece->block0->column = column;
-        tetrisPiece->block1->row = row + 1;
-        tetrisPiece->block1->column = column;
-        tetrisPiece->block2->row = row + 2;
-        tetrisPiece->block2->column = column;
-        tetrisPiece->block3->row = row + 3;
-        tetrisPiece->block3->column = column;
+        tetrisPiece->block0->column = column - 2;
+        tetrisPiece->block1->row = row;
+        tetrisPiece->block1->column = column - 1;
+        tetrisPiece->block3->row = row;
+        tetrisPiece->block3->column = column + 1;
     }
     else if (rotationCount == 1 || rotationCount == 3) {
-        tetrisPiece->block0->row = row;
-        tetrisPiece->block0->column = column - 1;
-        tetrisPiece->block1->row = row;
+        tetrisPiece->block0->row = row - 2;
+        tetrisPiece->block0->column = column;
+        tetrisPiece->block1->row = row - 1;
         tetrisPiece->block1->column = column;
-        tetrisPiece->block2->row = row;
-        tetrisPiece->block2->column = column + 1;
-        tetrisPiece->block3->row = row;
-        tetrisPiece->block3->column = column + 2;
+        tetrisPiece->block3->row = row + 1;
+        tetrisPiece->block3->column = column;
     }
     
     tetrisPiece->rotationCount = rotationCount;
-    tetrisPiece->pivotPosX = column;
-    tetrisPiece->pivotPosY = row;
+    tetrisPiece->pivotColumn = tetrisPiece->block2->column;
+    tetrisPiece->pivotRow = tetrisPiece->block2->row;
     tetrisPiece->type = TETRISPIECE_I;
 
     setTetrisBlocksType(tetrisPiece);
@@ -171,8 +170,8 @@ struct TetrisPiece* createTetrisPiece_J(
     }
     
     tetrisPiece->rotationCount = rotationCount;
-    tetrisPiece->pivotPosX = column;
-    tetrisPiece->pivotPosY = row;
+    tetrisPiece->pivotColumn = column;
+    tetrisPiece->pivotRow = row;
     tetrisPiece->type = TETRISPIECE_J;
 
     setTetrisBlocksType(tetrisPiece);
@@ -225,8 +224,8 @@ struct TetrisPiece* createTetrisPiece_L(
     }
     
     tetrisPiece->rotationCount = rotationCount;
-    tetrisPiece->pivotPosX = column;
-    tetrisPiece->pivotPosY = row;
+    tetrisPiece->pivotColumn = column;
+    tetrisPiece->pivotRow = row;
     tetrisPiece->type = TETRISPIECE_L;
 
     setTetrisBlocksType(tetrisPiece);
@@ -259,8 +258,8 @@ struct TetrisPiece* createTetrisPiece_S(
     }
     
     tetrisPiece->rotationCount = rotationCount;
-    tetrisPiece->pivotPosX = column;
-    tetrisPiece->pivotPosY = row;
+    tetrisPiece->pivotColumn = column;
+    tetrisPiece->pivotRow = row;
     tetrisPiece->type = TETRISPIECE_S;
 
     setTetrisBlocksType(tetrisPiece);
@@ -293,8 +292,8 @@ struct TetrisPiece* createTetrisPiece_Z(
     }
     
     tetrisPiece->rotationCount = rotationCount;
-    tetrisPiece->pivotPosX = column;
-    tetrisPiece->pivotPosY = row;
+    tetrisPiece->pivotColumn = column;
+    tetrisPiece->pivotRow = row;
     tetrisPiece->type = TETRISPIECE_Z;
 
     setTetrisBlocksType(tetrisPiece);

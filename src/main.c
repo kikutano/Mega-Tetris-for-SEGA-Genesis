@@ -47,17 +47,17 @@ int main() {
 
     VDP_fillTileMapRect(
         BG_B,  
-        TILE_ATTR_FULL(PAL2, 0, FALSE, FALSE, 8), 
+        TILE_ATTR_FULL(PAL2, 0, FALSE, FALSE, 8),
         tetrisSpriteMatrixOffsetX, 
         tetrisSpriteMatrixOffsetY,  
         GRID_COLUMNS, GRID_ROWS);
 
     JOY_init();   
-    JOY_setEventHandler(&onJoystickInput);    
-    startGameplay();          
+    JOY_setEventHandler(&onJoystickInput);   
+    startGameplay();           
  
     while(1) {  
-        updateGameplay();               
+        updateGameplay(); 
         VDP_waitVSync();   
     }  
 

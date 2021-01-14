@@ -39,8 +39,8 @@ struct TetrisPiece {
     struct Block *block1;
     struct Block *block2;
     struct Block *block3;
-    u16 pivotPosX;
-    u16 pivotPosY;
+    u16 pivotColumn;
+    u16 pivotRow;
     u16 type;
     int rotationCount;
 };

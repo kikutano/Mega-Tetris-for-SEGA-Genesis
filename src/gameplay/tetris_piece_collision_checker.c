@@ -5,6 +5,91 @@ u16 leftLimit  = 0;
 u16 rightLimit = 9;
 u16 downLimit  = 23;
 
+bool canRotateTetrisPiece_I(
+    u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], 
+    struct TetrisPiece *tetrisPiece, int nextRotationCount) {
+    
+    if (nextRotationCount == 0 || nextRotationCount == 2) {
+        if (tetrisPiece->pivotColumn >= GRID_COLUMNS - 2
+            || tetrisPiece->pivotColumn <= 1) {
+            return FALSE;
+        }
+
+        if (tetrisMatrix[tetrisPiece->pivotColumn - 2][tetrisPiece->pivotRow]
+            || tetrisMatrix[tetrisPiece->pivotColumn - 1][tetrisPiece->pivotRow]
+            || tetrisMatrix[tetrisPiece->pivotColumn][tetrisPiece->pivotRow]
+            || tetrisMatrix[tetrisPiece->pivotColumn + 1][tetrisPiece->pivotRow]) {
+            return FALSE;
+        }
+    }
+    else if (nextRotationCount == 1 || nextRotationCount == 3) {
+        if (tetrisPiece->pivotRow >= GRID_ROWS - 2) {
+            return FALSE;
+        }
+
+        if (tetrisMatrix[tetrisPiece->pivotColumn][tetrisPiece->pivotRow - 2]
+            || tetrisMatrix[tetrisPiece->pivotColumn][tetrisPiece->pivotRow - 1]
+            || tetrisMatrix[tetrisPiece->pivotColumn][tetrisPiece->pivotRow]
+            || tetrisMatrix[tetrisPiece->pivotColumn][tetrisPiece->pivotRow + 1]) {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+bool canRotateTetrisPiece_T(
+    u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], 
+    struct TetrisPiece *tetrisPiece, int nextRotationCount) {
+    
+    if (nextRotationCount != 2) {
+        if (tetrisPiece->pivotRow == GRID_ROWS - 2) {
+            return FALSE;
+        }
+    }
+
+    if (nextRotationCount == 0 || nextRotationCount == 2) {
+        if (tetrisPiece->pivotColumn == 0 
+            || tetrisPiece->pivotColumn == GRID_COLUMNS - 1) {
+            return FALSE;
+        }
+    }
+
+    if (nextRotationCount == 0) {
+        if (tetrisMatrix[tetrisPiece->pivotColumn - 1][tetrisPiece->pivotRow]
+            || tetrisMatrix[tetrisPiece->pivotColumn + 1][tetrisPiece->pivotRow]
+            || tetrisMatrix[tetrisPiece->pivotColumn][tetrisPiece->pivotRow + 1]) {
+            return FALSE;
+        }
+    }
+
+    if (nextRotationCount == 1) {
+        if (tetrisMatrix[tetrisPiece->pivotColumn - 1][tetrisPiece->pivotRow]
+            || tetrisMatrix[tetrisPiece->pivotColumn][tetrisPiece->pivotRow - 1]
+            || tetrisMatrix[tetrisPiece->pivotColumn][tetrisPiece->pivotRow + 1]) {
+            return FALSE;
+        }
+    }
+
+    if (nextRotationCount == 2) {
+        if (tetrisMatrix[tetrisPiece->pivotColumn - 1][tetrisPiece->pivotRow]
+            || tetrisMatrix[tetrisPiece->pivotColumn][tetrisPiece->pivotRow - 1]
+            || tetrisMatrix[tetrisPiece->pivotColumn + 1][tetrisPiece->pivotRow]) {
+            return FALSE;
+        }
+    }
+
+    if (nextRotationCount == 3) {
+        if (tetrisMatrix[tetrisPiece->pivotColumn + 1][tetrisPiece->pivotRow]
+            || tetrisMatrix[tetrisPiece->pivotColumn][tetrisPiece->pivotRow - 1]
+            || tetrisMatrix[tetrisPiece->pivotColumn][tetrisPiece->pivotRow + 1]) {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+ 
 bool isTetrisPieceOnLeftLimit(struct TetrisPiece *tetrisPiece) {
     return 
         tetrisPiece->block0->column == leftLimit 

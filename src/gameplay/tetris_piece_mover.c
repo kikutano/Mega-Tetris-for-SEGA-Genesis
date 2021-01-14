@@ -6,7 +6,7 @@
 #include "tetris_game_settings.h"
 #include "tetris_random_piece_provider.c"
 
-u16  tetrisMatrix[GRID_COLUMNS][GRID_ROWS];
+u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS];
 u16 rowsCleared[ROWS_MAX_CLEARED];
 u16 rowStartPoint = 0;
 u16 columnStartPoint = 5;
@@ -80,64 +80,94 @@ void updateTetrisPiecePosition() {
     if (currentTetrisPiece->type == TETRISPIECE_I) {
         currentTetrisPiece 
             = createTetrisPiece_I(
-                currentTetrisPiece->pivotPosX, 
-                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->pivotColumn, 
+                currentTetrisPiece->pivotRow, 
                 currentTetrisPiece->rotationCount);
     }
     else if (currentTetrisPiece->type == TETRISPIECE_O) {
         currentTetrisPiece 
             = createTetrisPiece_O(
-                currentTetrisPiece->pivotPosX, 
-                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->pivotColumn, 
+                currentTetrisPiece->pivotRow, 
                 currentTetrisPiece->rotationCount);
     } 
     else if (currentTetrisPiece->type == TETRISPIECE_T) {
         currentTetrisPiece 
             = createTetrisPiece_T(
-                currentTetrisPiece->pivotPosX, 
-                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->pivotColumn, 
+                currentTetrisPiece->pivotRow, 
                 currentTetrisPiece->rotationCount);
     }
     else if (currentTetrisPiece->type == TETRISPIECE_J) {
         currentTetrisPiece 
             = createTetrisPiece_J(
-                currentTetrisPiece->pivotPosX, 
-                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->pivotColumn, 
+                currentTetrisPiece->pivotRow, 
                 currentTetrisPiece->rotationCount);
     }
     else if (currentTetrisPiece->type == TETRISPIECE_L) {
         currentTetrisPiece 
             = createTetrisPiece_L(
-                currentTetrisPiece->pivotPosX, 
-                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->pivotColumn, 
+                currentTetrisPiece->pivotRow, 
                 currentTetrisPiece->rotationCount);
     }
     else if (currentTetrisPiece->type == TETRISPIECE_S) {
         currentTetrisPiece 
             = createTetrisPiece_S(
-                currentTetrisPiece->pivotPosX, 
-                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->pivotColumn, 
+                currentTetrisPiece->pivotRow, 
                 currentTetrisPiece->rotationCount);
     }
     else if (currentTetrisPiece->type == TETRISPIECE_Z) {
         currentTetrisPiece 
             = createTetrisPiece_Z(
-                currentTetrisPiece->pivotPosX, 
-                currentTetrisPiece->pivotPosY, 
+                currentTetrisPiece->pivotColumn, 
+                currentTetrisPiece->pivotRow, 
                 currentTetrisPiece->rotationCount);
     }
 
     drawTetrisPiece(currentTetrisPiece);
 }
 
-void rotateAntiClockwiseCurrentTetrisPiece() {
-    currentTetrisPiece->rotationCount++;
-
-    if (currentTetrisPiece->rotationCount >= 4) {
-        currentTetrisPiece->rotationCount = 0;
+bool canCurrentTetrisPieceRotate(int nextRotationCount) {
+    if (currentTetrisPiece->type == TETRISPIECE_I) {
+        return canRotateTetrisPiece_I(
+            tetrisMatrix, currentTetrisPiece, nextRotationCount);
+    }
+    else if (currentTetrisPiece->type == TETRISPIECE_T) {
+        return canRotateTetrisPiece_T(
+            tetrisMatrix, currentTetrisPiece, nextRotationCount);
     }
 
-    updateTetrisPiecePosition();
+    return FALSE;
+}
+
+int getNextAntiClockwiseRotationCount() {
+    if (currentTetrisPiece->rotationCount + 1 >= 4) {
+        return 0;
+    }
+    else {
+        return currentTetrisPiece->rotationCount + 1;
+    }
+}
+
+int getNextClockwiseRotationCount() {
+    if (currentTetrisPiece->rotationCount - 1 <= -1 ) {
+        return 3;
+    }
+    else {
+        return currentTetrisPiece->rotationCount - 1;
+    }
+}
+
+void rotateAntiClockwiseCurrentTetrisPiece() {
+    int nextRotationCount = getNextAntiClockwiseRotationCount();
+
+    if (canCurrentTetrisPieceRotate(nextRotationCount)) {
+        currentTetrisPiece->rotationCount = nextRotationCount;
+        updateTetrisPiecePosition();
+    }
 }
 
 void rotateClockwiseCurrentTetrisPiece() {
@@ -151,14 +181,14 @@ void rotateClockwiseCurrentTetrisPiece() {
 }
 
 void moveCurrentTetrisPieceDown() {
-    currentTetrisPiece->pivotPosY++;
+    currentTetrisPiece->pivotRow++;
     updateTetrisPiecePosition();
 }
 
 void moveCurrentTetrisPieceLeft() {
     if (!isTetrisPieceOnLeftLimit(currentTetrisPiece)
         && !isTetrisPieceTouchingAnotherPieceOnLeft(tetrisMatrix, currentTetrisPiece)) {
-        currentTetrisPiece->pivotPosX--;
+        currentTetrisPiece->pivotColumn--;
         updateTetrisPiecePosition();
     }
 }
@@ -166,7 +196,7 @@ void moveCurrentTetrisPieceLeft() {
 void moveCurrentTetrisPieceRight() {
     if (!isTetrisPieceOnRightLimit(currentTetrisPiece)
         && !isTetrisPieceTouchingAnotherPieceOnRight(tetrisMatrix, currentTetrisPiece)) {
-        currentTetrisPiece->pivotPosX++;
+        currentTetrisPiece->pivotColumn++;
         updateTetrisPiecePosition();
     }
 }
