@@ -2,25 +2,6 @@
 #include <resources.h>
 #include "gameplay/tetris_gameplay.c"
 
-void onJoystickInput( u16 joy, u16 changed, u16 state) {
-	if (joy == JOY_1) {
-		if (state & BUTTON_LEFT) {
-            moveCurrentTetrisPieceLeft();
-        }
-        else if (state & BUTTON_RIGHT) {
-            moveCurrentTetrisPieceRight();
-        }
-        else if (state & BUTTON_X) {
-            rotateAntiClockwiseCurrentTetrisPiece();
-        }
-        else if (state & BUTTON_Y) {
-            rotateClockwiseCurrentTetrisPiece();
-        }
-	}
-}
-
-
-
 int main() {
  
     VDP_setPaletteColor(0, RGB24_TO_VDPCOLOR(0x6dc2ca));
@@ -53,12 +34,12 @@ int main() {
         GRID_COLUMNS, GRID_ROWS);
 
     JOY_init();   
-    JOY_setEventHandler(&onJoystickInput);   
+    JOY_setEventHandler(&onJoystickInput);
     startGameplay();           
  
     while(1) {  
-        updateGameplay(); 
-        VDP_waitVSync();   
+        updateGameplay();  
+        VDP_waitVSync();     
     }  
 
     return 0;

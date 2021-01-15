@@ -139,6 +139,22 @@ bool canCurrentTetrisPieceRotate(int nextRotationCount) {
         return canRotateTetrisPiece_T(
             tetrisMatrix, currentTetrisPiece, nextRotationCount);
     }
+    else if (currentTetrisPiece->type == TETRISPIECE_J) {
+        return canRotateTetrisPiece_J(
+            tetrisMatrix, currentTetrisPiece, nextRotationCount);
+    }
+    else if (currentTetrisPiece->type == TETRISPIECE_L) {
+        return canRotateTetrisPiece_L(
+            tetrisMatrix, currentTetrisPiece, nextRotationCount);
+    }
+    else if (currentTetrisPiece->type == TETRISPIECE_Z) {
+        return canRotateTetrisPiece_Z(
+            tetrisMatrix, currentTetrisPiece, nextRotationCount);
+    }
+    else if (currentTetrisPiece->type == TETRISPIECE_S) {
+        return canRotateTetrisPiece_S(
+            tetrisMatrix, currentTetrisPiece, nextRotationCount);
+    }
 
     return FALSE;
 }

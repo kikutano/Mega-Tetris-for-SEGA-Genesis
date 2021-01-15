@@ -282,13 +282,13 @@ struct TetrisPiece* createTetrisPiece_Z(
     }
     else if (rotationCount == 1 || rotationCount == 3) {
         tetrisPiece->block0->row = row - 1;
-        tetrisPiece->block0->column = column;
+        tetrisPiece->block0->column = column + 1;
         tetrisPiece->block1->row = row;
         tetrisPiece->block1->column = column;
         tetrisPiece->block2->row = row;
-        tetrisPiece->block2->column = column - 1;
+        tetrisPiece->block2->column = column + 1;
         tetrisPiece->block3->row = row + 1;
-        tetrisPiece->block3->column = column - 1;
+        tetrisPiece->block3->column = column;
     }
     
     tetrisPiece->rotationCount = rotationCount;
