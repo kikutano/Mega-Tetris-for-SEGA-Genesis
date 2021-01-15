@@ -36,9 +36,10 @@ int main() {
     JOY_init();   
     JOY_setEventHandler(&onJoystickInput);
     startGameplay();           
- 
+
     while(1) {  
-        updateGameplay();  
+        VDP_showFPS(TRUE); 
+        updateGameplay(); 
         VDP_waitVSync();     
     }  
 

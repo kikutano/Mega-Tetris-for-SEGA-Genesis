@@ -239,19 +239,19 @@ void moveDownTetrisRow(u16 row, u16 offset) {
 u16 getCompletedRowLinesCount() {
     setCompletedLinesCount(tetrisMatrix, rowsCleared, currentTetrisPiece);
 
-    if (rowsCleared[3] != 0) {
+    if (rowsCleared[0] != 0) {
         return 4;
     } 
     
-    if (rowsCleared[2] != 0) {
+    if (rowsCleared[1] != 0) {
         return 3;
     } 
 
-    if (rowsCleared[1] != 0) {
+    if (rowsCleared[2] != 0) {
         return 2;
     } 
 
-    if (rowsCleared[0] != 0) {
+    if (rowsCleared[3] != 0) {
         return 1;
     } 
 
