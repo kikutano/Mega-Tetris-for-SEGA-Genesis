@@ -56,6 +56,25 @@ void enterInClearingGameState(u16 rowStartPoint, u16 rowsToClear) {
     startClearRowsAnimation(rowStartPoint, rowsToClear);
 }
 
+void updateGameScoreWhenDownPressed() {
+    currentScore += POINTS_PER_LINES;
+}
+
+void updateGameScoreScore(u8 lines) {
+    if (lines == 1) {
+        currentScore += POINTS_SINGLE;
+    }
+    else if (lines == 2) {
+        currentScore += POINTS_DOUBLE;
+    }
+    else if (lines == 3) {
+        currentScore += POINTS_TRIPLE;
+    }
+    else if (lines == 4) {
+        currentScore += POINTS_TETRIS;
+    }
+}
+
 void updateDirectionalInputControls() {
     u16 value = JOY_readJoypad(JOY_1);
 
@@ -82,25 +101,13 @@ void updateInputControls() {
         
         if (downPressed) {
             waitFramesForFalling = waitWithDownPressed;
+            updateGameScoreWhenDownPressed();
+            updateUICurrentScore(currentScore);
+            
         }
         else if (!downPressed) {
             waitFramesForFalling = waitFrameForFallingLvl1;
         }
-    }
-}
-
-void updateGameScoreScore(u8 lines) {
-    if (lines == 1) {
-        currentScore += POINTS_SINGLE;
-    }
-    else if (lines == 2) {
-        currentScore += POINTS_DOUBLE;
-    }
-    else if (lines == 3) {
-        currentScore += POINTS_TRIPLE;
-    }
-    else if (lines == 4) {
-        currentScore += POINTS_TETRIS;
     }
 }
 
