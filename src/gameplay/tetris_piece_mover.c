@@ -187,13 +187,12 @@ void rotateAntiClockwiseCurrentTetrisPiece() {
 }
 
 void rotateClockwiseCurrentTetrisPiece() {
-    currentTetrisPiece->rotationCount--;
+    int nextRotationCount = getNextClockwiseRotationCount();
 
-    if (currentTetrisPiece->rotationCount <= -1) {
-        currentTetrisPiece->rotationCount = 3;
+    if (canCurrentTetrisPieceRotate(nextRotationCount)) {
+        currentTetrisPiece->rotationCount = nextRotationCount;
+        updateTetrisPiecePosition();
     }
-
-    updateTetrisPiecePosition();
 }
 
 void moveCurrentTetrisPieceDown() {

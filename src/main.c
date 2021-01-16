@@ -33,15 +33,14 @@ int main() {
         tetrisSpriteMatrixOffsetY,  
         GRID_COLUMNS, GRID_ROWS);
 
-    JOY_init();   
-    JOY_setEventHandler(&onJoystickInput);
-    startGameplay();           
+    JOY_init();     
+    startGameplay();            
 
     while(1) {  
-        VDP_showFPS(TRUE); 
-        updateGameplay(); 
-        VDP_waitVSync();     
-    }  
+        VDP_showFPS(TRUE);   
+        updateGameplay();   
+        VDP_waitVSync();  
+    }   
 
     return 0;
 }
