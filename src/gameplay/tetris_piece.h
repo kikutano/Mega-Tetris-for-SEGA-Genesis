@@ -3,6 +3,8 @@
 
 int tetrisSpriteMatrixOffsetX = 15;
 int tetrisSpriteMatrixOffsetY = 2;
+u8 guiNextTetrisPieceXPos = 24;
+u8 guiNextTetrisPieceYPos = 4;
 
 struct Block {
     u16 row;
@@ -24,6 +26,14 @@ int getBlockSpritePositionXFromColumn(int column) {
 
 int getBlockSpritePositionYFromRow(int row) {
     return row + tetrisSpriteMatrixOffsetY;
+}
+
+int getBlockGUINextSpritePositionX(u16 column) {
+    return guiNextTetrisPieceXPos + column;
+}
+
+int getBlockGUINextSpritePositionY(u16 row) {
+    return guiNextTetrisPieceYPos + row;
 }
 
 u16 TETRISPIECE_I = 1;

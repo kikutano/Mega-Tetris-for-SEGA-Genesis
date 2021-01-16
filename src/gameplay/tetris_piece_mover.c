@@ -10,7 +10,7 @@ u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS];
 u16 rowsCleared[ROWS_MAX_CLEARED];
 u16 rowStartPoint = 0;
 u16 columnStartPoint = 5;
-//struct TetrisPiece *nextTetrisPiece;
+struct TetrisPiece *nextTetrisPiece;
 struct TetrisPiece *currentTetrisPiece;
 
 void updateMatrixSlot(u16 column, u16 row, bool value) {
@@ -21,39 +21,46 @@ u16 getNextRandomTetrisPiece() {
     return getRandomTetrisPieceUsingNesAlgorithm(currentTetrisPiece);
 }
 
-void putNextPieceOnTop() {
-    u16 nextTetriPieceType = getNextRandomTetrisPiece();
-
-    if (nextTetriPieceType == TETRISPIECE_I) {
-        currentTetrisPiece 
-            = createTetrisPiece_I(columnStartPoint, rowStartPoint, 0);
+struct TetrisPiece *createTetrisPiece(u16 type) {
+    if (type == TETRISPIECE_I) {
+        return createTetrisPiece_I(columnStartPoint, rowStartPoint, 0);
     }
-    else if (nextTetriPieceType == TETRISPIECE_O) {
-        currentTetrisPiece 
-            = createTetrisPiece_O(columnStartPoint, rowStartPoint, 0);
+    else if (type == TETRISPIECE_O) {
+        return createTetrisPiece_O(columnStartPoint, rowStartPoint, 0);
     } 
-    else if (nextTetriPieceType == TETRISPIECE_T) {
-        currentTetrisPiece 
-            = createTetrisPiece_T(columnStartPoint, rowStartPoint, 0);
+    else if (type == TETRISPIECE_T) {
+        return createTetrisPiece_T(columnStartPoint, rowStartPoint, 0);
     }
-    else if (nextTetriPieceType == TETRISPIECE_J) {
-        currentTetrisPiece 
-            = createTetrisPiece_J(columnStartPoint, rowStartPoint, 0);
+    else if (type == TETRISPIECE_J) {
+        return createTetrisPiece_J(columnStartPoint, rowStartPoint, 0);
     }
-    else if (nextTetriPieceType == TETRISPIECE_L) {
-        currentTetrisPiece 
-            = createTetrisPiece_L(columnStartPoint, rowStartPoint, 0);
+    else if (type == TETRISPIECE_L) {
+        return createTetrisPiece_L(columnStartPoint, rowStartPoint, 0);
     }
-    else if (nextTetriPieceType == TETRISPIECE_S) {
-        currentTetrisPiece 
-            = createTetrisPiece_S(columnStartPoint, rowStartPoint, 0);
+    else if (type == TETRISPIECE_S) {
+        return createTetrisPiece_S(columnStartPoint, rowStartPoint, 0);
     }
-    else if (nextTetriPieceType == TETRISPIECE_Z) {
-        currentTetrisPiece 
-            = createTetrisPiece_Z(columnStartPoint, rowStartPoint, 0);
+    else if (type == TETRISPIECE_Z) {
+        return createTetrisPiece_Z(columnStartPoint, rowStartPoint, 0);
     }
+
+    return createTetrisPiece_Z(columnStartPoint, rowStartPoint, 0); 
+}
+
+void putNextPieceOnTop() {
+    u16 nextTetrisPieceType = getNextRandomTetrisPiece();
+
+    if (nextTetrisPiece != NULL) {
+        deleteTetrisPieceOnNextGUI(nextTetrisPiece);
+        nextTetrisPieceType = nextTetrisPiece->type;
+    }
+ 
+    currentTetrisPiece  = createTetrisPiece(nextTetrisPieceType);       
+    nextTetrisPieceType = getNextRandomTetrisPiece();
+    nextTetrisPiece     = createTetrisPiece(nextTetrisPieceType);
 
     drawTetrisPiece(currentTetrisPiece);
+    drawTetrisPieceOnNextGUI(nextTetrisPiece);
 }
 
 bool isCurrentTetrisPieceOnBottom() {

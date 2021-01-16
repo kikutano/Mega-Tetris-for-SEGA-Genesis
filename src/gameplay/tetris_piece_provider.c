@@ -10,6 +10,13 @@ void drawTetrisBlock(struct Block *block, u16 type) {
         getBlockSpritePositionY(block));
 }
 
+void drawTetrisBlockOnNextGUI(struct Block *block) {
+    VDP_setTileMapXY(
+        BG_A, TILE_ATTR_FULL(PAL2, 0, FALSE, FALSE, block->type), 
+        getBlockGUINextSpritePositionX(block->column),
+        getBlockGUINextSpritePositionY(block->row));
+}
+
 void drawTetrisPiece(struct TetrisPiece *tetrisPiece) {
     drawTetrisBlock(tetrisPiece->block0, tetrisPiece->type);
     drawTetrisBlock(tetrisPiece->block1, tetrisPiece->type);
@@ -22,6 +29,22 @@ void deleteTetrisBlock(struct Block *block) {
         BG_A, 0, 
         getBlockSpritePositionX(block),
         getBlockSpritePositionY(block));
+    
+    MEM_free(block);
+}
+
+void drawTetrisPieceOnNextGUI(struct TetrisPiece *nextTetrisPiece) {
+    drawTetrisBlockOnNextGUI(nextTetrisPiece->block0);
+    drawTetrisBlockOnNextGUI(nextTetrisPiece->block1);
+    drawTetrisBlockOnNextGUI(nextTetrisPiece->block2);
+    drawTetrisBlockOnNextGUI(nextTetrisPiece->block3);
+}
+
+void deleteTetrisBlockOnNextGUI(struct Block *block) {
+    VDP_setTileMapXY(
+        BG_A, 0, 
+        getBlockGUINextSpritePositionX(block->column),
+        getBlockGUINextSpritePositionY(block->row));
     
     MEM_free(block);
 }
@@ -45,6 +68,15 @@ void deleteTetrisPiece(struct TetrisPiece *tetrisPiece) {
     deleteTetrisBlock(tetrisPiece->block1);
     deleteTetrisBlock(tetrisPiece->block2);
     deleteTetrisBlock(tetrisPiece->block3);
+
+    MEM_free(tetrisPiece);
+}
+
+void deleteTetrisPieceOnNextGUI(struct TetrisPiece *tetrisPiece) {
+    deleteTetrisBlockOnNextGUI(tetrisPiece->block0);
+    deleteTetrisBlockOnNextGUI(tetrisPiece->block1);
+    deleteTetrisBlockOnNextGUI(tetrisPiece->block2);
+    deleteTetrisBlockOnNextGUI(tetrisPiece->block3);
 
     MEM_free(tetrisPiece);
 }

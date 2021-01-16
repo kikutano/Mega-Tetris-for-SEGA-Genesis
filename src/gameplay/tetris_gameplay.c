@@ -1,5 +1,6 @@
 #include "tetris_piece_mover.c"
 #include "tetris_gfx_drawer.c"
+#include "gameplay/tetris_gameplay_scene_provider.c"
 
 u8 FALLING_STATE       = 0;
 u8 CLEARING_ROWS_STATE = 1;
@@ -15,6 +16,8 @@ bool tetrisPieceOnBottom;
 u8 animationBlinkingFrameDur = 20;
 u8 animationBlikingFrameCount = 0;
 u8 gameState = 0;
+
+u16 currentScore = 0;
 
 bool rightPressed                 = FALSE;
 bool leftPressed                  = FALSE;
@@ -86,6 +89,21 @@ void updateInputControls() {
     }
 }
 
+void updateGameScoreScore(u8 lines) {
+    if (lines == 1) {
+        currentScore += POINTS_SINGLE;
+    }
+    else if (lines == 2) {
+        currentScore += POINTS_DOUBLE;
+    }
+    else if (lines == 3) {
+        currentScore += POINTS_TRIPLE;
+    }
+    else if (lines == 4) {
+        currentScore += POINTS_TETRIS;
+    }
+}
+
 void updateFallingGameState() {
     if (tetrisPieceOnBottom) {
         putNextPieceOnTop();
@@ -105,6 +123,8 @@ void updateFallingGameState() {
             u16 linesToClear = getCompletedRowLinesCount();
             if (linesToClear > 0) {
                 enterInClearingGameState(rowsCleared[3], linesToClear);
+                updateGameScoreScore(linesToClear);
+                updateUICurrentScore(currentScore);
             }
         }
         else {
