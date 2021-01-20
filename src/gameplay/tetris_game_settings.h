@@ -11,4 +11,7 @@ const u16 POINTS_TRIPLE    = 300;
 const u16 POINTS_TETRIS    = 1200;
 const u16 POINTS_PER_LINES = 1;
 
+#define PALETTE_TETRIS_PIECE 2
+#define PALETTE_TETRIS_BACKGOUND 3
+
 #endif

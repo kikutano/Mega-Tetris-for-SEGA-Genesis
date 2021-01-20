@@ -1,6 +1,7 @@
 #include <genesis.h>
 #include "tetris_game_settings.h"
 
+
 u16 data[10];
 u16 rowsToClear;
 u16 rowToStart;
@@ -13,7 +14,7 @@ void startClearRowsAnimation(u16 startRow, u16 rowsCount) {
 
 void setTetrisRowTile(u16 tile) {
     for (int i = 0; i < 10; ++i) {
-        data[i] = TILE_ATTR_FULL(PAL2, 0, FALSE, FALSE, tile);
+        data[i] = TILE_ATTR_FULL(PALETTE_TETRIS_PIECE, 0, FALSE, FALSE, tile);
     }
 
     for (int i = rowToStart; i > rowToStart - rowsToClear; --i) {

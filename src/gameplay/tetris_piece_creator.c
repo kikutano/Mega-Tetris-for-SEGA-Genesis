@@ -1,5 +1,6 @@
 #include <genesis.h>
 #include "tetris_piece.h"
+#include "tetris_game_settings.h"
 
 struct TetrisPiece* createTetrisPieceContainer() {
     struct TetrisPiece *tetrisPiece 

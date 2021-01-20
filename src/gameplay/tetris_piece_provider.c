@@ -5,14 +5,14 @@
 
 void drawTetrisBlock(struct Block *block, u16 type) {
     VDP_setTileMapXY(
-        BG_A, TILE_ATTR_FULL(PAL2, 0, FALSE, FALSE, type), 
+        BG_A, TILE_ATTR_FULL(PALETTE_TETRIS_PIECE, 0, FALSE, FALSE, type), 
         getBlockSpritePositionX(block),
         getBlockSpritePositionY(block));
 }
 
 void drawTetrisBlockOnNextGUI(struct Block *block) {
     VDP_setTileMapXY(
-        BG_A, TILE_ATTR_FULL(PAL2, 0, FALSE, FALSE, block->type), 
+        BG_A, TILE_ATTR_FULL(PALETTE_TETRIS_PIECE, 0, FALSE, FALSE, block->type), 
         getBlockGUINextSpritePositionX(block->column),
         getBlockGUINextSpritePositionY(block->row));
 }
@@ -58,7 +58,7 @@ void deleteTetrisTileOnGrid(u16 column, u16 row) {
 
 void drawTetrisTileOnGrid(u16 column, u16 row, u16 type) {
     VDP_setTileMapXY(
-        BG_A, TILE_ATTR_FULL(PAL2, 0, FALSE, FALSE, type),
+        BG_A, TILE_ATTR_FULL(PALETTE_TETRIS_PIECE, 0, FALSE, FALSE, type),
         getBlockSpritePositionXFromColumn(column),
         getBlockSpritePositionYFromRow(row));
 }

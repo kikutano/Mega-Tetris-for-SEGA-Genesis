@@ -3,7 +3,7 @@
 
 int tetrisSpriteMatrixOffsetX = 15;
 int tetrisSpriteMatrixOffsetY = 2;
-u8 guiNextTetrisPieceXPos = 24;
+u8 guiNextTetrisPieceXPos = 2;
 u8 guiNextTetrisPieceYPos = 4;
 
 struct Block {

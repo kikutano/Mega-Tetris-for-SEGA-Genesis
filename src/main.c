@@ -1,7 +1,7 @@
 #include <genesis.h>
 #include <resources.h>
 #include "gameplay/tetris_gameplay.c"
-
+ 
 int main() {
  
     initTetrisGameplayScene();
@@ -9,9 +9,9 @@ int main() {
 
     while(1) {  
         VDP_showFPS(TRUE);
-        updateGameplay();  
-        VDP_waitVSync();
-    } 
-   
-    return 0;
+        updateGameplay(); 
+        VDP_waitVSync(); 
+    }    
+          
+    return 0;   
 }
