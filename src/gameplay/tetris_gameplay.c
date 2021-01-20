@@ -6,8 +6,8 @@ u8 FALLING_STATE       = 0;
 u8 CLEARING_ROWS_STATE = 1;
 
 u16 waitWithDownPressed      = 5;
-u16 waitFramesForFalling     = 30;
-u16 waitFrameForFallingLvl1  = 30;
+u16 waitWithNormalFallSpeed  = 60;
+u16 waitFramesForFalling     = 60;
 
 u16 currentFallingFrameCount = 0;
 u16 waitFrameForHorzMovement = 5;
@@ -17,7 +17,10 @@ u8 animationBlinkingFrameDur = 20;
 u8 animationBlikingFrameCount = 0;
 u8 gameState = 0;
 
-u16 currentScore = 0;
+u32 currentScore       = 0;
+u16 linesCleared       = 0;
+u16 currentLevel       = 1;
+u16 nextLinesToLevelUp = 10;
 
 bool rightPressed                 = FALSE;
 bool leftPressed                  = FALSE;
@@ -106,8 +109,31 @@ void updateInputControls() {
             
         }
         else if (!downPressed) {
-            waitFramesForFalling = waitFrameForFallingLvl1;
+            waitFramesForFalling = waitWithNormalFallSpeed;
         }
+    }
+}
+
+void updateLinesCleared(u16 lines) {
+    linesCleared += lines;
+    updateUICurrentLines(linesCleared);
+}
+
+void increaseFallingSpeedAfterLevelUp() {
+    if (waitWithNormalFallSpeed > 2) {
+        waitWithNormalFallSpeed--;
+        waitWithNormalFallSpeed--;
+        waitFramesForFalling = waitWithNormalFallSpeed;
+    }
+}
+
+void checkIfMustUpdateLevel() {
+    if (linesCleared >= nextLinesToLevelUp) {
+        currentLevel++;
+        updateUICurrentLevel(currentLevel);
+        increaseFallingSpeedAfterLevelUp();
+
+        nextLinesToLevelUp = 10 * currentLevel;
     }
 }
 
@@ -132,6 +158,8 @@ void updateFallingGameState() {
                 enterInClearingGameState(rowsCleared[3], linesToClear);
                 updateGameScoreScore(linesToClear);
                 updateUICurrentScore(currentScore);
+                updateLinesCleared(linesToClear);
+                checkIfMustUpdateLevel();
             }
         }
         else {

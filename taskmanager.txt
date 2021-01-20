@@ -1,0 +1,12 @@
+#BUGS:
+
+#TODO:
+- Audio Fx
+- Music 
+- Gfx Effects
+- Tetris Gameplay Background Image
+- Main menu
+- Game Over State
+- Highscore Saving
+
+#DONE:

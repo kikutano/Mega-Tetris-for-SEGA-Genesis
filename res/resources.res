@@ -6,4 +6,4 @@ IMAGE tetrisblock_O "tiles/tetrisblock_O.png" 0
 IMAGE tetrisblock_S "tiles/tetrisblock_S.png" 0  
 IMAGE tetrisblock_T "tiles/tetrisblock_T.png" 0  
 IMAGE tetrisblock_Z "tiles/tetrisblock_Z.png" 0
-IMAGE tetris_scene_background "tiles/tetris_scene_background.png" 0  
+IMAGE tetris_scene_background "tiles/tetris_scene_background.png" 0 

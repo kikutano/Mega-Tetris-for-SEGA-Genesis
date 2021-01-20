@@ -13,5 +13,5 @@ int main() {
         VDP_waitVSync(); 
     }    
           
-    return 0;   
+    return 0;  
 }
