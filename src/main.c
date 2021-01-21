@@ -1,19 +1,16 @@
 #include <genesis.h>
 #include <resources.h>
-#include "gameplay/tetris_gameplay.c"
-#include "music/music_provider.c"
- 
-int main() {
-    
-    initSoundEffects();
-    initTetrisGameplayScene();
-    startGameplay();            
+#include "scenemanager/scenemanager.c"
 
+int main() {
+    initSceneManager();
+    startSceneManager();
+ 
     while(1) {  
-        VDP_showFPS(TRUE);
-        updateGameplay();  
+        //VDP_showFPS(TRUE); 
+        updateSceneManager();  
         VDP_waitVSync();
-    }    
+    } 
             
-    return 0;  
-}
+    return 0;    
+} 

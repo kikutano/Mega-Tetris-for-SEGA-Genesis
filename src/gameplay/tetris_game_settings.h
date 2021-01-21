@@ -14,4 +14,9 @@ const u16 POINTS_PER_LINES = 1;
 #define PALETTE_TETRIS_PIECE 2
 #define PALETTE_TETRIS_BACKGOUND 3
 
+#define MAINMENUSTATE 0
+#define GAMEPLAYSTATE 1
+
+u8 currentState = MAINMENUSTATE;
+
 #endif

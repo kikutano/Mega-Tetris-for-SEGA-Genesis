@@ -1,6 +1,9 @@
+#ifndef _TETRIS_GAMEPLAY_
+#define _TETRIS_GAMEPLAY_
+
 #include "tetris_piece_mover.c"
 #include "tetris_gfx_drawer.c"
-#include "gameplay/tetris_gameplay_scene_provider.c"
+#include "tetris_gameplay_scene_provider.c"
 #include "../music/music_provider.c"
 
 u8 FALLING_STATE       = 0;
@@ -29,7 +32,7 @@ bool downPressed                  = FALSE;
 bool rotationAntiClockwisePressed = FALSE;
 bool rotationClockwisePressed     = FALSE;
 
-void onJoypadInput( u16 joy, u16 changed, u16 state) {
+void onJoypadInput(u16 joy, u16 changed, u16 state) {
 	if (joy == JOY_1) {
 		if (state & BUTTON_Y) {
             playSoundFxRotation();
@@ -52,9 +55,10 @@ void onJoypadInput( u16 joy, u16 changed, u16 state) {
 }
 
 void startGameplay() {
+    currentState = GAMEPLAYSTATE;
     JOY_setEventHandler(&onJoypadInput);
     putNextPieceOnTop();
-    playBGMusicMainMenu();
+    playBGMusicTetrisGameplay();
 }
 
 void enterInClearingGameState(u16 rowStartPoint, u16 rowsToClear) {
@@ -202,3 +206,5 @@ void updateGameplay() {
         updateFallingGameState();
     }
 }
+
+#endif

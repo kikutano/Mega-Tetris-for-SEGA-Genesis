@@ -80,5 +80,5 @@ void initTetrisGameplayScene() {
     updateUICurrentLevel(1);
     updateUICurrentLines(0);
 
-    JOY_init();     
+    JOY_init();
 }

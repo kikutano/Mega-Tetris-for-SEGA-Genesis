@@ -16,5 +16,6 @@ extern const Image tetrisblock_S;
 extern const Image tetrisblock_T;
 extern const Image tetrisblock_Z;
 extern const Image tetris_scene_background;
+extern const Image mainmenu_scene_background;
 
 #endif // _RES_RESOURCES_H_
