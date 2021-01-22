@@ -25,6 +25,7 @@ u8 animationBlikingFrameCount = 0;
 u8 gameState = 0;
 
 u32 currentScore       = 0;
+u32 highScore          = 0;
 u16 linesCleared       = 0;
 u16 currentLevel       = 1;
 u16 nextLinesToLevelUp = 10;
@@ -93,6 +94,7 @@ void initGameplay() {
     gameState = OPENING_STATE;
 
     initTetrisGameplayScene();
+    updateUICurrentHighScore(highScore);
 }
 
 void startGameplay() {
@@ -186,6 +188,10 @@ void checkIfMustUpdateLevel() {
 }
 
 void enterInPlayerDyingState() {
+    if (currentScore > highScore) {
+        highScore = currentScore;
+    }
+
     XGM_stopPlay();
     playSoundDying();
     gameState = CLOSING_STATE;
