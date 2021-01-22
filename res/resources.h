@@ -7,6 +7,7 @@ extern const u8 sfx_touch[7168];
 extern const u8 sfx_rotation[10752];
 extern const u8 sfx_lineclear[34816];
 extern const u8 sfx_tetris_voice[7424];
+extern const u8 sfx_dying[72448];
 extern const Image bgtile;
 extern const Image tetrisblock_I;
 extern const Image tetrisblock_J;

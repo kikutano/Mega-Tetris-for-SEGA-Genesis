@@ -2,6 +2,7 @@
 #include <resources.h>
 #include "tetris_piece.h"
 #include "tetris_game_settings.h"
+#include "tetris_gfx_drawer.c"
 
 const u8 guiNextPieceRectX = 26;
 const u8 guiNextPieceRectY = 2;
@@ -79,6 +80,7 @@ void initTetrisGameplayScene() {
     updateUICurrentHighScore(0);
     updateUICurrentLevel(1);
     updateUICurrentLines(0);
-
+    startAnimationWallOpeningTetrisGrid();
+    
     JOY_init();
 }

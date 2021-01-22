@@ -29,11 +29,6 @@ void deleteTetrisBlock(struct Block *block) {
         BG_A, 
         getBlockSpritePositionX(block),
         getBlockSpritePositionY(block), 1, 1);
-
-    /*VDP_setTileMapXY(
-        BG_A, 0, 
-        getBlockSpritePositionX(block),
-        getBlockSpritePositionY(block));*/
     
     MEM_free(block);
 }
@@ -50,11 +45,6 @@ void deleteTetrisBlockOnNextGUI(struct Block *block) {
         BG_A, 
         getBlockGUINextSpritePositionX(block->column),
         getBlockGUINextSpritePositionY(block->row), 1, 1);
-
-    /*VDP_setTileMapXY(
-        BG_A, 0, 
-        getBlockGUINextSpritePositionX(block->column),
-        getBlockGUINextSpritePositionY(block->row));*/
     
     MEM_free(block);
 }
@@ -64,11 +54,6 @@ void deleteTetrisTileOnGrid(u16 column, u16 row) {
         BG_A, 
         getBlockSpritePositionXFromColumn(column),
         getBlockSpritePositionYFromRow(row), 1, 1);
-
-    /*VDP_setTileMapXY(
-        BG_A, 0, 
-        getBlockSpritePositionXFromColumn(column),
-        getBlockSpritePositionYFromRow(row));*/
 }
 
 void drawTetrisTileOnGrid(u16 column, u16 row, u16 type) {

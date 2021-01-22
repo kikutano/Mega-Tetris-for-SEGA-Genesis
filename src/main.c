@@ -2,15 +2,15 @@
 #include <resources.h>
 #include "scenemanager/scenemanager.c"
 
-int main() {
-    initSceneManager();
+int main() { 
+    initSceneManager(); 
     startSceneManager();
  
     while(1) {   
-        //VDP_showFPS(TRUE); 
+        //VDP_showFPS(TRUE);    
         updateSceneManager();  
-        VDP_waitVSync();
-    } 
-            
-    return 0;  
-}  
+        VDP_waitVSync(); 
+    }  
+
+    return 0;    
+}

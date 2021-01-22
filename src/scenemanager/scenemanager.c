@@ -1,4 +1,6 @@
 
+#ifndef _SCENEMANAGER_H_
+#define _SCENEMANAGER_H_
 #include "mainmenu/mainmenu_gameplay.c"
 #include "gameplay/tetris_gameplay.c"
 
@@ -11,10 +13,18 @@ void startSceneManager() {
 }
 
 void updateSceneManager() {
-    if (currentState == MAINMENUSTATE) {
+    if (currentGameState == MAINMENUSTATE) {
         updateMainMenu();
     }
-    else if (currentState == GAMEPLAYSTATE) {
+    else if (currentGameState == GAMEPLAYSTATE) {
         updateGameplay();
+
+        if (goToMainMenu) {
+            goToMainMenu = FALSE;
+            JOY_setEventHandler(NULL);
+            initMainMenu();
+        }
     }
 }
+
+#endif

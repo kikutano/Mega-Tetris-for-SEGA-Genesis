@@ -17,6 +17,6 @@ const u16 POINTS_PER_LINES = 1;
 #define MAINMENUSTATE 0
 #define GAMEPLAYSTATE 1
 
-u8 currentState = MAINMENUSTATE;
+u8 currentGameState = MAINMENUSTATE;
 
 #endif

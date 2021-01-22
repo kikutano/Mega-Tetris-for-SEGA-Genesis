@@ -9,6 +9,10 @@ bool canRotateTetrisPiece_I(
     u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], 
     struct TetrisPiece *tetrisPiece, int nextRotationCount) {
     
+    if (tetrisPiece->pivotRow < 2) {
+        return FALSE;
+    }
+
     if (nextRotationCount == 0 || nextRotationCount == 2) {
         if (tetrisPiece->pivotColumn >= GRID_COLUMNS - 2
             || tetrisPiece->pivotColumn <= 1) {
@@ -42,6 +46,10 @@ bool canRotateTetrisPiece_T(
     u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], 
     struct TetrisPiece *tetrisPiece, int nextRotationCount) {
     
+    if (tetrisPiece->pivotRow < 1) {
+        return FALSE;
+    }
+
     if (nextRotationCount != 2) {
         if (tetrisPiece->pivotRow == GRID_ROWS - 2) {
             return FALSE;
@@ -94,6 +102,10 @@ bool canRotateTetrisPiece_J(
     u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], 
     struct TetrisPiece *tetrisPiece, int nextRotationCount) {
     
+    if (tetrisPiece->pivotRow < 1) {
+        return FALSE;
+    }
+
     if (tetrisPiece->rotationCount == 1) {
         if (tetrisPiece->pivotColumn == GRID_COLUMNS - 1) {
             return FALSE;
@@ -149,6 +161,10 @@ bool canRotateTetrisPiece_L(
     u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], 
     struct TetrisPiece *tetrisPiece, int nextRotationCount) {
     
+    if (tetrisPiece->pivotRow < 1) {
+        return FALSE;
+    }
+
     if (tetrisPiece->rotationCount == 3) {
         if (tetrisPiece->pivotColumn == 0) {
             return FALSE;
@@ -204,6 +220,10 @@ bool canRotateTetrisPiece_Z(
     u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], 
     struct TetrisPiece *tetrisPiece, int nextRotationCount) {
     
+    if (tetrisPiece->pivotRow < 1) {
+        return FALSE;
+    }
+
     if (tetrisPiece->rotationCount == 1 || tetrisPiece->rotationCount == 3) {
         if (tetrisPiece->pivotColumn == 0) {
             return FALSE;
@@ -235,6 +255,10 @@ bool canRotateTetrisPiece_S(
     u16 tetrisMatrix[GRID_COLUMNS][GRID_ROWS], 
     struct TetrisPiece *tetrisPiece, int nextRotationCount) {
     
+    if (tetrisPiece->pivotRow < 1) {
+        return FALSE;
+    }
+
     if (tetrisPiece->rotationCount == 1 || tetrisPiece->rotationCount == 3) {
         if (tetrisPiece->pivotColumn == 0) {
             return FALSE;
@@ -336,6 +360,14 @@ bool isTetrisPieceTouchingAnotherPieceOnBottom(
         tetrisMatrix
             [tetrisPiece->block3->column]
             [tetrisPiece->block3->row + 1];
+}
+
+bool isTetrisPieceOnGameOverZone(struct TetrisPiece *tetrisPiece) {
+    return 
+        tetrisPiece->block0->row == 0
+        || tetrisPiece->block1->row == 0
+        || tetrisPiece->block2->row == 0
+        || tetrisPiece->block3->row == 0;
 }
 
 bool isTetrisPieceOnBottom(struct TetrisPiece *tetrisPiece) {

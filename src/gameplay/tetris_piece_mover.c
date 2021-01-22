@@ -17,6 +17,14 @@ void updateMatrixSlot(u16 column, u16 row, bool value) {
     tetrisMatrix[column][row] = value;
 }
 
+void clearMatrixSlot() {
+    for (u8 i = 0; i < GRID_COLUMNS; ++i) {
+        for (u8 j = 0; j < GRID_ROWS; ++j) {
+            tetrisMatrix[i][j] = FALSE;
+        }
+    }
+}
+
 u16 getNextRandomTetrisPiece() {
     return getRandomTetrisPieceUsingNesAlgorithm(currentTetrisPiece);
 }
@@ -69,6 +77,10 @@ bool isCurrentTetrisPieceOnBottom() {
 
 bool isCurrentTetrisPieceTouchingAnotherPieceOnBottom() {
     return isTetrisPieceTouchingAnotherPieceOnBottom(tetrisMatrix, currentTetrisPiece);
+}
+
+bool isCurrentTetrisPieceOnGameOverZone() {
+    return isTetrisPieceOnGameOverZone(currentTetrisPiece);
 }
 
 void occupyMatrixSlotForTetrisPiece(struct TetrisPiece *tetrisPiece) {

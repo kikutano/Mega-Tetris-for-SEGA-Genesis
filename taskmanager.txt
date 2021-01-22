@@ -2,14 +2,14 @@
 
 #TODO:
 - Clean code and right variables (u8 instead of u16)
-- Audio Fx
-- Music 
 - Gfx Effects
-- Tetris Gameplay Background Image
-- Main menu
 - Game Over State
 - 3..2..1..
 - Highscore Saving
 
 
 #DONE:
+- Main menu
+- Audio Fx
+- Music 
+- Tetris Gameplay Background Image
