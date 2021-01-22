@@ -6,11 +6,11 @@ int main() {
     initSceneManager();
     startSceneManager();
  
-    while(1) {  
+    while(1) {   
         //VDP_showFPS(TRUE); 
         updateSceneManager();  
         VDP_waitVSync();
     } 
             
-    return 0;    
-} 
+    return 0;  
+}  

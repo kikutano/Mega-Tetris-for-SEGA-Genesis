@@ -25,10 +25,15 @@ void drawTetrisPiece(struct TetrisPiece *tetrisPiece) {
 }
 
 void deleteTetrisBlock(struct Block *block) {
-    VDP_setTileMapXY(
+    VDP_clearTileMapRect(
+        BG_A, 
+        getBlockSpritePositionX(block),
+        getBlockSpritePositionY(block), 1, 1);
+
+    /*VDP_setTileMapXY(
         BG_A, 0, 
         getBlockSpritePositionX(block),
-        getBlockSpritePositionY(block));
+        getBlockSpritePositionY(block));*/
     
     MEM_free(block);
 }
@@ -41,19 +46,29 @@ void drawTetrisPieceOnNextGUI(struct TetrisPiece *nextTetrisPiece) {
 }
 
 void deleteTetrisBlockOnNextGUI(struct Block *block) {
-    VDP_setTileMapXY(
+    VDP_clearTileMapRect(
+        BG_A, 
+        getBlockGUINextSpritePositionX(block->column),
+        getBlockGUINextSpritePositionY(block->row), 1, 1);
+
+    /*VDP_setTileMapXY(
         BG_A, 0, 
         getBlockGUINextSpritePositionX(block->column),
-        getBlockGUINextSpritePositionY(block->row));
+        getBlockGUINextSpritePositionY(block->row));*/
     
     MEM_free(block);
 }
 
 void deleteTetrisTileOnGrid(u16 column, u16 row) {
-    VDP_setTileMapXY(
+    VDP_clearTileMapRect(
+        BG_A, 
+        getBlockSpritePositionXFromColumn(column),
+        getBlockSpritePositionYFromRow(row), 1, 1);
+
+    /*VDP_setTileMapXY(
         BG_A, 0, 
         getBlockSpritePositionXFromColumn(column),
-        getBlockSpritePositionYFromRow(row));
+        getBlockSpritePositionYFromRow(row));*/
 }
 
 void drawTetrisTileOnGrid(u16 column, u16 row, u16 type) {
@@ -82,8 +97,8 @@ void deleteTetrisPieceOnNextGUI(struct TetrisPiece *tetrisPiece) {
 }
 
 void deleteSpritesOnRow(u16 row) {
-    VDP_setTileMapDataRow(
-        BG_A, 0, 
-        getBlockSpritePositionYFromRow(row), 
-        getBlockSpritePositionXFromColumn(0), 10, CPU );
+    VDP_clearTileMapRect(
+        BG_A, 
+        getBlockSpritePositionXFromColumn(0),
+        getBlockSpritePositionYFromRow(row), GRID_COLUMNS, 1);
 }

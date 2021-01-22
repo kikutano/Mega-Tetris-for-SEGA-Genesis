@@ -35,6 +35,9 @@ bool rotationClockwisePressed     = FALSE;
 void onJoypadInput(u16 joy, u16 changed, u16 state) {
 	if (joy == JOY_1) {
 		if (state & BUTTON_Y) {
+            
+            deleteSpritesOnRow(10);
+
             playSoundFxRotation();
             rotateAntiClockwiseCurrentTetrisPiece();
         }

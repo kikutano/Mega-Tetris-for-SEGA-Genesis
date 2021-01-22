@@ -40,7 +40,7 @@ void drawGameplayGrid() {
     VDP_drawImageEx(
         BG_B, 
         &tetris_scene_background, 
-        TILE_ATTR_FULL(PAL3, 0, FALSE, FALSE, 9), 0, 0, 0, CPU);
+        TILE_ATTR_FULL(PAL3, 0, FALSE, FALSE, 9), 0, 0, 1, DMA);
 }
 
 void updateUICurrentLines(u16 level) {
