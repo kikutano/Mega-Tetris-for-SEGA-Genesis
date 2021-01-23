@@ -17,13 +17,10 @@ void onMainMenuJoypadInput(u16 joy, u16 changed, u16 state) {
 
 void initMainMenu() {
     currentGameState = MAINMENUSTATE;
+    loadAndShowMainMenuGraphicsWithFadeIn();
 
-    loadMainMenuGraphics();
-    playBGMusicMainMenu();
     JOY_setEventHandler(&onMainMenuJoypadInput);
-    
-    VDP_fadeInAll(mainmenu_scene_background.palette->data, 40, FALSE);
-    VDP_waitFadeCompletion();
+    playBGMusicMainMenu();
 }
 
 void updateMainMenu() {
@@ -31,11 +28,10 @@ void updateMainMenu() {
 }
 
 void changeSceneToTetrisGameplay() {
-    VDP_fadeOut(0, (4 * 16) - 1, 40, FALSE);
+    XGM_stopPlay();
+    VDP_fadeOutAll(40, FALSE);
     VDP_waitFadeCompletion();
 
-    playSoundFxTouchTheGround();
-    XGM_stopPlay();
     initTetrisGameplayScene();
     initGameplay();
 }

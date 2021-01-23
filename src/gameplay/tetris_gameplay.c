@@ -84,16 +84,12 @@ void onJoypadInput(u16 joy, u16 changed, u16 state) {
 }
 
 void initGameplay() {
-    VDP_fadeInAll(tetris_scene_background.palette->data, 40, FALSE);
-    VDP_waitFadeCompletion();
-
     currentScore = 0;
     linesCleared = 0;
     currentLevel = 1;
     currentGameState = GAMEPLAYSTATE;
     gameState = OPENING_STATE;
 
-    initTetrisGameplayScene();
     updateUICurrentHighScore(highScore);
 }
 

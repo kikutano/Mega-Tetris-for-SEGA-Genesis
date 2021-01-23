@@ -18,8 +18,10 @@ const u8 guiLevelRectY     = 11;
 const u8 guiLinesRectX     = 28;
 const u8 guiLinesRectY     = 14;
 
+void loadTetrisPiecesGameplayGraphics();
+void loadTetrisGameplayBackgroundWithFadeIn();
 
-void loadTetrisGameplayGraphics() {
+void loadTetrisPiecesGameplayGraphics() {
     VDP_setPaletteColor(0, RGB24_TO_VDPCOLOR(0x6dc2ca));
      
     VDP_loadTileSet(tetrisblock_I.tileset, TETRISPIECE_I, DMA);
@@ -29,19 +31,27 @@ void loadTetrisGameplayGraphics() {
     VDP_loadTileSet(tetrisblock_S.tileset, TETRISPIECE_S, DMA);
     VDP_loadTileSet(tetrisblock_T.tileset, TETRISPIECE_T, DMA);
     VDP_loadTileSet(tetrisblock_Z.tileset, TETRISPIECE_Z, DMA);
-
     VDP_loadTileSet(bgtile.tileset, 8, DMA);
 
     VDP_setPalette(PALETTE_TETRIS_PIECE, bgtile.palette->data);
 }
 
-void drawGameplayGrid() {
+void loadTetrisGameplayBackgroundWithFadeIn() {
+    VDP_setPaletteColors(PAL0, (u16*)palette_black, 64);
+
     VDP_setPalette(PALETTE_TETRIS_BACKGOUND, 
         tetris_scene_background.palette->data);
+
     VDP_drawImageEx(
         BG_B, 
         &tetris_scene_background, 
-        TILE_ATTR_FULL(PAL3, 0, FALSE, FALSE, 9), 0, 0, 1, DMA);
+        TILE_ATTR_FULL(PAL0, 0, FALSE, FALSE, 9), 0, 0, FALSE, DMA);
+    
+    VDP_fadeInAll(tetris_scene_background.palette->data, 40, FALSE);
+    VDP_waitFadeCompletion();
+
+    VDP_setPalette(PALETTE_TETRIS_BACKGOUND, 
+        tetris_scene_background.palette->data);
 }
 
 void updateUICurrentLines(u16 level) {
@@ -73,9 +83,9 @@ void updateUICurrentHighScore(u32 hiscore) {
 }
 
 void initTetrisGameplayScene() {
-    loadTetrisGameplayGraphics();
-    drawGameplayGrid();
-
+    loadTetrisGameplayBackgroundWithFadeIn();
+    loadTetrisPiecesGameplayGraphics();
+    
     updateUICurrentScore(0);
     updateUICurrentHighScore(0);
     updateUICurrentLevel(1);
