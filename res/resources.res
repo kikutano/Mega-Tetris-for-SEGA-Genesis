@@ -18,4 +18,3 @@ WAV sfx_rotation  "soundfx/sfx_rotation.wav"
 WAV sfx_lineclear "soundfx/sfx_lineclear.wav"
 WAV sfx_tetris_voice "soundfx/sfx_tetris_voice.wav"  
 WAV sfx_dying "soundfx/sfx_dying.wav"
-
