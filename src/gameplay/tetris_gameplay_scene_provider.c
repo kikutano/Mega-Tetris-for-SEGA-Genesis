@@ -10,13 +10,13 @@ const u8 guiNextPieceRectW = 6;
 const u8 guiNextPieceRectH = 4;
 
 const u8 guiHighScoreRectX = 28;
-const u8 guiHighScoreRectY = 5;
+const u8 guiHighScoreRectY = 4;
 const u8 guiCurrScoreRectX = 28;
 const u8 guiCurrScoreRectY = 8;
-const u8 guiLevelRectX     = 28;
-const u8 guiLevelRectY     = 11;
-const u8 guiLinesRectX     = 28;
-const u8 guiLinesRectY     = 14;
+const u8 guiLevelRectX     = 30;
+const u8 guiLevelRectY     = 16;
+const u8 guiLinesRectX     = 30;
+const u8 guiLinesRectY     = 12;
 
 void loadTetrisPiecesGameplayGraphics();
 void loadTetrisGameplayBackgroundWithFadeIn();
@@ -60,8 +60,8 @@ void loadTetrisGameplayBackgroundWithFadeIn() {
 }
 
 void updateUICurrentLines(const u16 level) {
-    char s[4];
-    uintToStr(level, s, 4);
+    char s[3];
+    uintToStr(level, s, 3);
 
     VDP_drawTextBG(BG_A, s, guiLinesRectX, guiLinesRectY);
 }
