@@ -36,7 +36,8 @@ void loadTetrisPiecesGameplayGraphics() {
     VDP_loadTileSet(tetrisblock_S.tileset, TETRISPIECE_S, DMA);
     VDP_loadTileSet(tetrisblock_T.tileset, TETRISPIECE_T, DMA);
     VDP_loadTileSet(tetrisblock_Z.tileset, TETRISPIECE_Z, DMA);
-    VDP_loadTileSet(bgtile.tileset, 8, DMA);
+    VDP_loadTileSet(bgtile.tileset, TILE_TILESET, DMA);
+    VDP_loadTileSet(brick.tileset, TILE_BRICK, DMA);
 
     VDP_setPalette(PALETTE_TETRIS_PIECE, bgtile.palette->data);
 }
@@ -50,7 +51,7 @@ void loadTetrisGameplayBackgroundWithFadeIn() {
     VDP_drawImageEx(
         BG_B, 
         &tetris_scene_background, 
-        TILE_ATTR_FULL(PAL0, 0, FALSE, FALSE, 9), 0, 0, FALSE, DMA);
+        TILE_ATTR_FULL(PAL0, 0, FALSE, FALSE, TILE_BRICK + 1), 0, 0, FALSE, DMA);
     
     VDP_fadeInAll(tetris_scene_background.palette->data, 40, FALSE);
     VDP_waitFadeCompletion();

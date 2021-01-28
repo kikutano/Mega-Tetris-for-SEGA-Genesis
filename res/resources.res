@@ -1,4 +1,5 @@
 IMAGE bgtile      "tiles/bgtile.png"  0
+IMAGE brick       "tiles/brick.png"  0
 IMAGE fadetoblack "tiles/fadetoblack.png" 0
 IMAGE tetrisblock_I "tiles/tetrisblock_I.png" 0  
 IMAGE tetrisblock_J "tiles/tetrisblock_J.png" 0  
@@ -17,4 +18,4 @@ WAV sfx_touch     "soundfx/sfx_touch.wav"
 WAV sfx_rotation  "soundfx/sfx_rotation.wav"
 WAV sfx_lineclear "soundfx/sfx_lineclear.wav"
 WAV sfx_tetris_voice "soundfx/sfx_tetris_voice.wav"  
-WAV sfx_dying "soundfx/sfx_dying.wav"    
+WAV sfx_dying "soundfx/sfx_dying.wav"

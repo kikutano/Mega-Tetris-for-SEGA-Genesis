@@ -245,8 +245,6 @@ void updateFallingGameState() {
 
 void enterInGameOverState() {
     gameState = GAMEOVER_STATE;
-    VDP_drawText("Game Over!", 6, 16 );
-    VDP_drawText("Press Any Button To Restart", 6, 18 );
 }
 
 void updateClearingRowsGameState() {

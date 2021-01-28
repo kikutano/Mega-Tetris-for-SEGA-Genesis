@@ -14,15 +14,15 @@ bool openingAnimationEnded;
 bool closingAnimationEnded;
 
 void startClearRowsAnimation(u16 startRow, u16 rowsCount) {
-    rowToStart = startRow;
+    rowToStart = startRow + 1;
     rowsToClear = rowsCount;
 }
 
-void setTetrisRowTile(const u16 *data, u8 rowToStart, u8 rowsToClear) {
+void setTetrisRowTile(const u16 *data, const u8 rowToStart, const u8 rowsToClear) {
     for (u8 i = rowToStart; i > rowToStart - rowsToClear; --i) {
         VDP_setTileMapDataRow(
             BG_A, data,
-            getBlockSpritePositionYFromRow(i), 
+            getBlockSpritePositionYFromRow(i - 1), 
             getBlockSpritePositionXFromColumn(0), GRID_COLUMNS, DMA);
     }
 }
@@ -47,9 +47,9 @@ void updateRowBlinkingAnimation() {
 }
 
 void startAnimationWallOpeningTetrisGrid() {
-    rowToStart  = GRID_ROWS - 1;
-    rowsToClear = GRID_ROWS - 1;
-    setTetrisRowsTile(1);
+    rowToStart  = GRID_ROWS;
+    rowsToClear = GRID_ROWS;
+    setTetrisRowsTile(TILE_BRICK);
 
     anFrameCurrent = 0;
     rowAnimatedCount = 0;
@@ -106,11 +106,11 @@ void updateAnimationWallClosingTetrisGrid() {
             rowToStart = rowAnimatedCount + 1;
             rowsToClear = 1;
 
-            setTetrisRowsTile(1);
+            setTetrisRowsTile(TILE_BRICK);
 
             ++rowAnimatedCount;
 
-            if (rowAnimatedCount >= GRID_ROWS - 1) {
+            if (rowAnimatedCount >= GRID_ROWS) {
                 animationWallClosingEnded();
             }
         }

@@ -43,6 +43,8 @@ u16 TETRISPIECE_O = 4;
 u16 TETRISPIECE_S = 5;
 u16 TETRISPIECE_T = 6;
 u16 TETRISPIECE_Z = 7;
+u8 TILE_TILESET   = 8;
+u8 TILE_BRICK     = 9;
 
 struct TetrisPiece {
     struct Block *block0;

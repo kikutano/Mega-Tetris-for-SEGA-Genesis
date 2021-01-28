@@ -9,6 +9,7 @@ extern const u8 sfx_lineclear[34816];
 extern const u8 sfx_tetris_voice[7424];
 extern const u8 sfx_dying[72448];
 extern const Image bgtile;
+extern const Image brick;
 extern const Image fadetoblack;
 extern const Image tetrisblock_I;
 extern const Image tetrisblock_J;
