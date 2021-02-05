@@ -61,13 +61,13 @@ void onJoypadInput(u16 joy, u16 changed, u16 state) {
             performGoBackToMainMenu();
         }
 
-		if (state & BUTTON_Y) {
+		if (state & BUTTON_B) {
             deleteSpritesOnRow(10);
 
             playSoundFxRotation();
             rotateAntiClockwiseCurrentTetrisPiece();
         }
-        else if (state & BUTTON_X) {
+        else if (state & BUTTON_A) {
             playSoundFxRotation();
             rotateClockwiseCurrentTetrisPiece();
         }
@@ -130,8 +130,8 @@ void updateDirectionalInputControls() {
     downPressed  = value & BUTTON_DOWN;
     rightPressed = value & BUTTON_RIGHT;
     leftPressed  = value & BUTTON_LEFT;
-    rotationAntiClockwisePressed = value & BUTTON_X;
-    rotationClockwisePressed     = value & BUTTON_Y;
+    rotationAntiClockwisePressed = value & BUTTON_A;
+    rotationClockwisePressed     = value & BUTTON_B;
 }
 
 void updateInputControls() {

@@ -8,7 +8,7 @@ int main() {
  
     while(1) {   
         //VDP_showFPS(TRUE);    
-        updateSceneManager();   
+        updateSceneManager();    
         VDP_waitVSync(); 
     }  
   

@@ -1,6 +1,6 @@
 # Mega Tetris For Sega Genesis
 
-**Current Code Version:** 0.8.1
+**Current Code Version:** 0.8.2
 
 **Depencency:** [SGDK 1.5.1](https://github.com/Stephane-D/SGDK)
 

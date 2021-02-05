@@ -17,6 +17,6 @@ void loadAndShowMainMenuGraphicsWithFadeIn() {
     VDP_setPalette(PAL0, 
         mainmenu_scene_background.palette->data);
     
-    VDP_drawTextBG(BG_A, "v0.8.1", 30, 26);
+    VDP_drawTextBG(BG_A, "v0.8.2", 30, 26);
     VDP_drawTextBG(BG_A, "@kikutano", 30, 27);
 }
